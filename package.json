@@ -8,11 +8,21 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
   "dependencies": {
     "@fullcalendar/core": "^6.1.17",
     "@fullcalendar/daygrid": "^6.1.17",
+    "@fullcalendar/google-calendar": "^6.1.17",
     "@fullcalendar/interaction": "^6.1.17",
+    "@fullcalendar/list": "^6.1.17",
     "@fullcalendar/timegrid": "^6.1.17"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kalina0502/ict-calendar.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Kalina0502/ict-calendar/issues"
+  },
+  "homepage": "https://github.com/Kalina0502/ict-calendar#readme",
+  "description": ""
 }
