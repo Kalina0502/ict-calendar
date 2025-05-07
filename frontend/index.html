@@ -22,43 +22,44 @@
 </head>
 
 <body>
-  <div id="filters">
-    <label>Category:</label>
-    <select id="categoryFilter">
-      <option value="all">All</option>
-      <option value="monthly">Monthly</option>
-      <option value="internal">Internal</option>
-      <option value="partner">Partner</option>
-      <option value="training">Training</option>
-    </select>
-  
-    <label>Location:</label>
-    <select id="locationFilter">
-      <option value="all">All</option>
-      <option value="varna">Varna</option>
-      <option value="sofia">Sofia</option>
-      <option value="plovdiv">Plovdiv</option>
-      <option value="online">Online</option>
-    </select>
-  
-    <label>Organizer:</label>
-    <select id="organizerFilter">
-      <option value="all">All</option>
-      <option value="ict">ICT Cluster</option>
-      <option value="partner">Partner</option>
-    </select>
-  
-    <label>Search:</label>
-    <input type="text" id="keywordFilter" placeholder="Search by keyword" />
-  
-    <button onclick="printView()">🖨 Print</button>
-    <button onclick="exportToPDF()">📄 Export PDF</button>
+  <div id="calendar-layout">
+    <div id="filters">
+      <label for="categoryFilter">Category:</label>
+      <select id="categoryFilter">
+        <option value="all">All</option>
+        <option value="monthly">Monthly</option>
+        <option value="internal">Internal</option>
+        <option value="partner">Partner</option>
+        <option value="training">Training</option>
+      </select>
+
+      <label for="locationFilter">Location:</label>
+      <select id="locationFilter">
+        <option value="all">All</option>
+        <option value="varna">Varna</option>
+        <option value="sofia">Sofia</option>
+        <option value="plovdiv">Plovdiv</option>
+        <option value="online">Online</option>
+      </select>
+
+      <label for="organizerFilter">Organizer:</label>
+      <select id="organizerFilter">
+        <option value="all">All</option>
+        <option value="ict">ICT Cluster</option>
+        <option value="partner">Partner</option>
+      </select>
+
+      <label for="keywordFilter">Search:</label>
+      <input type="text" id="keywordFilter" placeholder="Search by keyword" />
+
+      <button onclick="printView()">🖨 Print</button>
+      <button onclick="exportToPDF()">📄 Export PDF</button>
+    </div>
+
+    <div id="calendar"></div>
+
+    <script src="../src/main.js"></script>
   </div>
-  
-
-  <div id="calendar"></div>
-
-  <script src="../src/main.js"></script>
 </body>
 
 </html>

@@ -4,8 +4,10 @@
     }
 
     #calendar {
-        max-width: 900px;
-        margin: 40px auto;
+        /* max-width: 900px;
+        margin: 40px auto; */
+        flex: 1;
+        min-width: 600px;
     }
 
     #categoryFilter {
@@ -13,8 +15,83 @@
     }
 
     @media print {
-        #filters, .fc-toolbar, .fc-button, .fc-header-toolbar {
-          display: none !important;
+
+        #filters,
+        .fc-toolbar,
+        .fc-button,
+        .fc-header-toolbar {
+            display: none !important;
         }
-      }
-      
+    }
+
+    /* Контейнер за филтрите */
+    /* Layout: лява колона (филтри) + дясна (календар) */
+    #calendar-layout {
+        display: flex;
+        gap: 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+        align-items: flex-start;
+        flex-wrap: wrap;
+    }
+
+    /* Филтри в лява колона */
+    #filters {
+        flex: 0 0 250px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        background: #f8f9fa;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        padding: 16px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        font-family: Arial, sans-serif;
+        margin-top: 100px;
+    }
+
+    /* Селекти, текстово поле */
+    #filters select,
+    #filters input[type="text"] {
+        padding: 6px 10px;
+        font-size: 0.95rem;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        background-color: white;
+        transition: border-color 0.2s;
+    }
+
+    #filters select:focus,
+    #filters input[type="text"]:focus {
+        border-color: #3788d8;
+        outline: none;
+    }
+
+    /* Бутони */
+    #filters button {
+        padding: 6px 12px;
+        background-color: #3788d8;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        font-size: 0.95rem;
+        cursor: pointer;
+        transition: background-color 0.2s;
+    }
+
+    #filters button:hover {
+        background-color: #2c6bb2;
+    }
+
+    /* Responsive адаптация */
+    @media (max-width: 768px) {
+        #calendar-layout {
+            flex-direction: column;
+        }
+
+        #filters {
+            flex: 1;
+            width: 100%;
+        }
+    }
