@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const location = locationFilter.value.toLowerCase();
         const organizer = organizerFilter.value.toLowerCase();
         const search = keywordFilter.value.toLowerCase();
-      
+
         const filtered = allEvents.filter(ev => {
           return (
             (category === 'all' || (ev.category || '').toLowerCase() === category) &&
@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function () {
             (search === '' || ev.title.toLowerCase().includes(search) || (ev.description || '').toLowerCase().includes(search))
           );
         });
-      
+
         calendar.removeAllEvents();
         calendar.addEventSource(mapEvents(filtered));
       }
@@ -70,23 +70,47 @@ document.addEventListener('DOMContentLoaded', function () {
         window.print();
       };
 
-      window.exportToPDF = function () {
-        import('https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js').then(jsPDF => {
-          const { jsPDF: PDF } = jsPDF;
-          const doc = new PDF();
+      function exportToPDF() {
+        const currentDate = calendar.getDate();
+        const currentMonth = currentDate.getMonth();
+        const currentYear = currentDate.getFullYear();
 
-          doc.text("Upcoming Events", 10, 10);
-          let y = 20;
-          calendar.getEvents().forEach(ev => {
-            const title = ev.title;
-            const start = ev.start?.toLocaleString() || '';
-            doc.text(`${start} - ${title}`, 10, y);
-            y += 10;
-          });
-
-          doc.save("calendar-export.pdf");
+        const eventsForMonth = calendar.getEvents().filter(event => {
+          const eventDate = event.start;
+          return eventDate.getMonth() === currentMonth && eventDate.getFullYear() === currentYear;
         });
-      };
+
+        if (eventsForMonth.length === 0) {
+          alert("There are no events for the current month.");
+          return;
+        }
+
+        const doc = new window.jspdf.jsPDF();
+        doc.setFontSize(14);
+        doc.text("Exported Calendar Events", 14, 20);
+
+        const tableData = eventsForMonth.map(evt => [
+          evt.title || "-",
+          evt.start ? new Date(evt.start).toLocaleString() : "-",
+          evt.end ? new Date(evt.end).toLocaleString() : "-",
+          evt.extendedProps?.location || "-",
+          evt.extendedProps?.organizer || "-",
+          evt.extendedProps?.category || "-"
+        ]);
+
+        doc.autoTable({
+          head: [["Title", "Start", "End", "Location", "Organizer", "Category"]],
+          body: tableData,
+          startY: 30,
+          theme: "grid",
+          headStyles: { fillColor: [41, 128, 185] },
+        });
+
+        doc.save("calendar-events.pdf");
+      }
+
+      window.exportToPDF = exportToPDF;
+
 
       function mapEvents(eventArray) {
         return eventArray.map(event => {
