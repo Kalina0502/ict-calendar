@@ -1,0 +1,13 @@
+    body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+    }
+
+    #calendar {
+        max-width: 900px;
+        margin: 40px auto;
+    }
+
+    #categoryFilter {
+        margin-bottom: 20px;
+    }
