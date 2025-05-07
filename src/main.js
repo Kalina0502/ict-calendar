@@ -1,26 +1,21 @@
 document.addEventListener('DOMContentLoaded', function () {
   const calendarEl = document.getElementById('calendar');
+  const categorySelect = document.getElementById('categoryFilter');
 
-  // Зареждане на събития от JSON файл
+  let allEvents = [];
+
   fetch('../data/events.json')
     .then(response => response.json())
     .then(events => {
-      // Цветове според категория
+      allEvents = events;
+
       const categoryColors = {
-        monthly: "#6c5ce7",    // Месечна среща
-        internal: "#0984e3",   // Собствено събитие
-        partner: "#00b894",    // Партньорско
-        training: "#fdcb6e"    // Обучение
+        monthly: "#6c5ce7",
+        internal: "#0984e3",
+        partner: "#00b894",
+        training: "#fdcb6e"
       };
 
-      // Добавяне на цвят към всяко събитие
-      const coloredEvents = events.map(event => ({
-        ...event,
-        backgroundColor: categoryColors[event.category] || '#b2bec3',
-        borderColor: categoryColors[event.category] || '#b2bec3'
-      }));
-
-      // Инициализация на календара
       const calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: 'dayGridMonth',
         headerToolbar: {
@@ -33,8 +28,8 @@ document.addEventListener('DOMContentLoaded', function () {
           minute: '2-digit',
           hour12: false
         },
-        events: coloredEvents,
-        eventClick: function (info) {
+        events: mapEvents(allEvents),
+        eventClick: function(info) {
           info.jsEvent.preventDefault();
           if (info.event.url) {
             window.open(info.event.url, '_blank');
@@ -43,8 +38,28 @@ document.addEventListener('DOMContentLoaded', function () {
       });
 
       calendar.render();
+
+      // Event listener за филтъра
+      categorySelect.addEventListener('change', function () {
+        const selected = this.value;
+
+        const filtered = selected === 'all'
+          ? allEvents
+          : allEvents.filter(e => e.category === selected);
+
+        calendar.removeAllEvents();
+        calendar.addEventSource(mapEvents(filtered));
+      });
+
+      function mapEvents(eventArray) {
+        return eventArray.map(event => ({
+          ...event,
+          backgroundColor: categoryColors[event.category] || '#b2bec3',
+          borderColor: categoryColors[event.category] || '#b2bec3'
+        }));
+      }
     })
     .catch(error => {
-      console.error('Грешка при зареждане на събитията:', error);
+      console.error('Error loading events:', error);
     });
 });

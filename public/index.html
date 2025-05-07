@@ -1,26 +1,38 @@
 <!DOCTYPE html>
 <html lang="bg">
-  <head>
-    <meta charset="UTF-8" />
-  
-    <!-- FullCalendar от CDN -->
-    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.min.css" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
-  
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        padding: 20px;
-      }
-      #calendar {
-        max-width: 900px;
-        margin: 40px auto;
-      }
-    </style>
-  </head>
-  
+
+<head>
+  <meta charset="UTF-8" />
+  <label for="categoryFilter">Filter by category:</label>
+  <select id="categoryFilter">
+    <option value="all">All</option>
+    <option value="monthly">Monthly</option>
+    <option value="internal">Internal</option>
+    <option value="partner">Partner</option>
+    <option value="training">Training</option>
+  </select>
+
+
+  <!-- FullCalendar от CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    #calendar {
+      max-width: 900px;
+      margin: 40px auto;
+    }
+  </style>
+</head>
+
 <body>
   <div id="calendar"></div>
   <script src="../src/main.js"></script>
 </body>
+
 </html>
