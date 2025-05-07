@@ -11,3 +11,10 @@
     #categoryFilter {
         margin-bottom: 20px;
     }
+
+    @media print {
+        #filters, .fc-toolbar, .fc-button, .fc-header-toolbar {
+          display: none !important;
+        }
+      }
+      

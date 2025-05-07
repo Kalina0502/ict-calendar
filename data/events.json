@@ -1,68 +1,84 @@
 [
-    {
-      "id": "1",
-      "title": "Вътрешна среща на екипа",
-      "start": "2025-06-10T10:00:00",
-      "end": "2025-06-10T11:30:00",
-      "category": "internal",
-      "url": "https://example.com/news/team-meeting"
-    },
-    {
-      "id": "2",
-      "title": "Обучение: Киберсигурност",
-      "start": "2025-06-12",
-      "category": "training",
-      "description": "Онлайн уъркшоп за добри практики в ИТ сигурността.",
-      "url": "https://example.com/training/cybersecurity"
-    },
-    {
-      "id": "3",
-      "title": "Среща с партньори – БТПП",
-      "start": "2025-06-15T14:00:00",
-      "category": "partner",
-      "location": "Варна, Конферентна зала 1",
-      "url": "https://example.com/partners/btpp"
-    },
-    {
-      "id": "4",
-      "title": "Лятна академия за ученици",
-      "start": "2025-07-01",
-      "end": "2025-07-05",
-      "category": "training",
-      "allDay": true,
-      "url": "https://example.com/academy"
-    },
-    {
-      "id": "5",
-      "title": "Работна сесия: Подготовка на проект",
-      "start": "2025-06-20T09:00:00",
-      "end": "2025-06-20T10:30:00",
-      "category": "internal",
-      "url": "https://example.com/internal/project"
-    },
-    {
-      "id": "6",
-      "title": "Семинар с външен лектор",
-      "start": "2025-06-20T11:00:00",
-      "end": "2025-06-20T12:30:00",
-      "category": "training",
-      "url": "https://example.com/training/seminar"
-    },
-    {
-      "id": "7",
-      "title": "Кафе с партньори",
-      "start": "2025-06-20T14:00:00",
-      "end": "2025-06-20T15:00:00",
-      "category": "partner",
-      "url": "https://example.com/partners/coffee"
-    },    {
-      "id": "8",
-      "title": "Месечна среща",
-      "start": "2025-06-10T12:00:00",
-      "end": "2025-06-10T14:30:00",
-      "category": "monthly",
-      "url": "https://example.com/news/team-meeting"
-    }
-    
-  ]
-  
+  {
+    "id": "1",
+    "title": "Обучение: Киберсигурност",
+    "start": "2025-06-12T10:00:00",
+    "category": "training",
+    "location": "Sofia",
+    "organizer": "partner",
+    "description": "Обучение за основи на киберсигурността",
+    "url": "https://ictclustervarna.com/news/tech-day-varna"
+  },
+  {
+    "id": "2",
+    "title": "Семинар с партньори",
+    "start": "2025-06-20T11:00:00",
+    "category": "partner",
+    "location": "Varna",
+    "organizer": "cluster",
+    "description": "Партньорски семинар за стратегическо планиране",
+    "url": "https://ictclustervarna.com/news/tech-day-varna"
+  },
+  {
+    "id": "3",
+    "title": "Работна среща",
+    "start": "2025-06-20T09:00:00",
+    "category": "internal",
+    "location": "Plovdiv",
+    "organizer": "cluster",
+    "description": "Среща между екипи",
+    "url": "https://ictclustervarna.com/news/tech-day-varna"
+  },
+  {
+    "id": "10",
+    "title": "AI Seminar",
+    "start": "2025-06-05T09:00:00",
+    "end": "2025-06-05T12:00:00",
+    "category": "training",
+    "location": "Sofia",
+    "organizer": "ict",
+    "description": "Seminar on AI trends and tools",
+    "url": "https://ictclustervarna.com/news/ai-seminar"
+  },
+  {
+    "id": "11",
+    "title": "Networking Conference",
+    "start": "2025-06-10",
+    "end": "2025-06-11",
+    "category": "partner",
+    "location": "Varna",
+    "organizer": "partner",
+    "description": "Two-day partner networking event",
+    "url": "https://ictclustervarna.com/news/networking-conference"
+  },
+  {
+    "id": "12",
+    "title": "Internal Planning Meeting",
+    "start": "2025-06-15T14:00:00",
+    "end": "2025-06-15T16:00:00",
+    "category": "internal",
+    "location": "Plovdiv",
+    "organizer": "ict",
+    "description": "Internal session for upcoming projects"
+  },
+  {
+    "id": "13",
+    "title": "One-day Hackathon",
+    "start": "2025-06-20",
+    "category": "training",
+    "location": "Online",
+    "organizer": "partner",
+    "description": "24-hour coding challenge"
+  },
+  {
+    "id": "14",
+    "title": "Tech Expo",
+    "start": "2025-06-25T10:00:00",
+    "end": "2025-06-27T18:00:00",
+    "category": "partner",
+    "location": "Sofia",
+    "organizer": "partner",
+    "description": "Technology exhibition with over 100 vendors",
+    "url": "https://ictclustervarna.com/news/tech-expo"
+  }
+]
