@@ -11,13 +11,18 @@ document.addEventListener('DOMContentLoaded', function () {
           center: 'title',
           right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
         },
+        eventTimeFormat: {
+          hour: '2-digit',
+          minute: '2-digit',
+          hour12: false
+        },
         events: events,
         eventClick: function(info) {
           info.jsEvent.preventDefault();
           if (info.event.url) {
             window.open(info.event.url, '_blank');
           }
-        }
+        }  
       });
 
       calendar.render();
