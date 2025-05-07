@@ -4,12 +4,21 @@
 <head>
   <meta charset="UTF-8" />
   <!-- FullCalendar от CDN -->
-  <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/main.min.css" rel="stylesheet" />
-  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
+  <!-- <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/main.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script> -->
+
+<!-- FullCalendar локално включване -->
+<script src="../project-root/libs/fullcalendar/core/index.global.min.js"></script>
+<script src="../project-root/libs/fullcalendar/core/locales-all.global.min.js"></script>
+<script src="../project-root/libs/fullcalendar/daygrid/index.global.min.js"></script>
+<script src="../project-root/libs/fullcalendar/timegrid/index.global.min.js"></script>
+<script src="../project-root/libs/fullcalendar/list/index.global.min.js"></script>
+<script src="../project-root/libs/fullcalendar/interaction/index.global.min.js"></script>
+
   <link rel="stylesheet" href="styles.css" />
 </head>
 
-<body>
+<body>  
   <label for="categoryFilter">Filter by category:</label>
   <select id="categoryFilter">
     <option value="all">All</option>
