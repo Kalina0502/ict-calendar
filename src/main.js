@@ -7,17 +7,37 @@ document.addEventListener('DOMContentLoaded', function () {
 
   let allEvents = [];
 
+  const categoryColors = {
+    monthly: "#6c5ce7",
+    internal: "#0984e3",
+    partner: "#00b894",
+    training: "#fdcb6e"
+  };
+
+  function mapEvents(eventArray) {
+    return eventArray.map(event => {
+      const color = categoryColors[event.category] || '#b2bec3';
+
+      const extended = {
+        category: event.category || '',
+        location: event.location || '',
+        organizer: event.organizer || '',
+        description: event.description || ''
+      };
+
+      return {
+        ...event,
+        backgroundColor: color,
+        borderColor: color,
+        extendedProps: extended
+      };
+    });
+  }
+
   fetch('../data/events.json')
     .then(response => response.json())
     .then(events => {
       allEvents = events;
-
-      const categoryColors = {
-        monthly: "#6c5ce7",
-        internal: "#0984e3",
-        partner: "#00b894",
-        training: "#fdcb6e"
-      };
 
       const calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: 'dayGridMonth',
@@ -65,7 +85,6 @@ document.addEventListener('DOMContentLoaded', function () {
         calendar.addEventSource(mapEvents(filtered));
       }
 
-
       window.printView = function () {
         window.print();
       };
@@ -110,27 +129,6 @@ document.addEventListener('DOMContentLoaded', function () {
       }
 
       window.exportToPDF = exportToPDF;
-
-
-      function mapEvents(eventArray) {
-        return eventArray.map(event => {
-          const color = categoryColors[event.category] || '#b2bec3';
-
-          const extended = {
-            category: event.category || '',
-            location: event.location || '',
-            organizer: event.organizer || '',
-            description: event.description || ''
-          };
-
-          return {
-            ...event,
-            backgroundColor: color,
-            borderColor: color,
-            extendedProps: extended
-          };
-        });
-      }
 
     })
     .catch(error => {
