@@ -14,7 +14,9 @@
     "@fullcalendar/google-calendar": "^6.1.17",
     "@fullcalendar/interaction": "^6.1.17",
     "@fullcalendar/list": "^6.1.17",
-    "@fullcalendar/timegrid": "^6.1.17"
+    "@fullcalendar/rrule": "^6.1.17",
+    "@fullcalendar/timegrid": "^6.1.17",
+    "rrule": "^2.8.1"
   },
   "repository": {
     "type": "git",
