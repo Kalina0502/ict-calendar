@@ -1,3 +1,13 @@
+let calendar;
+let allEvents = [];
+let selectedEvent = null;
+let categoryColors = {
+  monthly: "#6c5ce7",
+  internal: "#0984e3",
+  partner: "#00b894",
+  training: "#fdcb6e"
+};
+
 document.addEventListener('DOMContentLoaded', function () {
   const calendarEl = document.getElementById('calendar');
   const categoryFilter = document.getElementById('categoryFilter');
@@ -5,41 +15,12 @@ document.addEventListener('DOMContentLoaded', function () {
   const organizerFilter = document.getElementById('organizerFilter');
   const keywordFilter = document.getElementById('keywordFilter');
 
-  let allEvents = [];
-
-  const categoryColors = {
-    monthly: "#6c5ce7",
-    internal: "#0984e3",
-    partner: "#00b894",
-    training: "#fdcb6e"
-  };
-
-  function mapEvents(eventArray) {
-    return eventArray.map(event => {
-      const color = categoryColors[event.category] || '#b2bec3';
-
-      const extended = {
-        category: event.category || '',
-        location: event.location || '',
-        organizer: event.organizer || '',
-        description: event.description || ''
-      };
-
-      return {
-        ...event,
-        backgroundColor: color,
-        borderColor: color,
-        extendedProps: extended
-      };
-    });
-  }
-
   fetch('/events')
     .then(response => response.json())
     .then(events => {
       allEvents = events;
 
-      const calendar = new FullCalendar.Calendar(calendarEl, {
+      calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: 'dayGridMonth',
         headerToolbar: {
           left: 'prev,next today',
@@ -54,9 +35,7 @@ document.addEventListener('DOMContentLoaded', function () {
         events: mapEvents(allEvents),
         eventClick: function (info) {
           info.jsEvent.preventDefault();
-          if (info.event.url) {
-            window.open(info.event.url, '_blank');
-          }
+          openEditModal(info.event);
         }
       });
 
@@ -133,5 +112,129 @@ document.addEventListener('DOMContentLoaded', function () {
     })
     .catch(error => {
       console.error('Error loading events:', error);
+    });
+
+  function mapEvents(eventArray) {
+    return eventArray.map(event => {
+      const color = categoryColors[event.category] || '#b2bec3';
+
+      return {
+        ...event,
+        backgroundColor: color,
+        borderColor: color,
+        extendedProps: {
+          category: event.category || '',
+          location: event.location || '',
+          organizer: event.organizer || '',
+          description: event.description || ''
+        }
+      };
+    });
+  }
+});
+
+// ====== Modal logic ======
+const modal = document.getElementById('eventModal');
+const form = document.getElementById('eventForm');
+const closeBtn = document.querySelector('.close-button');
+const modalTitle = document.getElementById('modalTitle');
+
+const idInput = document.getElementById('eventId');
+const titleInput = document.getElementById('title');
+const startInput = document.getElementById('start');
+const endInput = document.getElementById('end');
+const categoryInput = document.getElementById('category');
+const locationInput = document.getElementById('location');
+const organizerInput = document.getElementById('organizer');
+const urlInput = document.getElementById('url');
+const descriptionInput = document.getElementById('description');
+
+document.getElementById('addEventBtn').addEventListener('click', () => {
+  selectedEvent = null;
+  modalTitle.textContent = 'Add New Event';
+  form.reset();
+  modal.style.display = 'flex';
+});
+
+function openEditModal(event) {
+  selectedEvent = event;
+  modalTitle.textContent = 'Edit Event';
+  idInput.value = event.id || '';
+  titleInput.value = event.title || '';
+  startInput.value = event.startStr ? event.startStr.slice(0, 16) : '';
+  endInput.value = event.endStr ? event.endStr.slice(0, 16) : '';
+  categoryInput.value = event.extendedProps.category || '';
+  locationInput.value = event.extendedProps.location || '';
+  organizerInput.value = event.extendedProps.organizer || '';
+  urlInput.value = event.url || '';
+  descriptionInput.value = event.extendedProps.description || '';
+  modal.style.display = 'flex';
+}
+
+function closeModal() {
+  modal.style.display = 'none';
+  form.reset();
+  selectedEvent = null;
+}
+
+closeBtn.addEventListener('click', closeModal);
+window.addEventListener('click', e => {
+  if (e.target === modal) closeModal();
+});
+
+form.addEventListener('submit', function (e) {
+  e.preventDefault();
+
+  const eventData = {
+    title: titleInput.value,
+    start: startInput.value,
+    end: endInput.value,
+    category: categoryInput.value,
+    location: locationInput.value,
+    organizer: organizerInput.value,
+    url: urlInput.value,
+    description: descriptionInput.value,
+  };
+
+  const method = idInput.value ? 'PUT' : 'POST';
+  const url = idInput.value ? `/events/${idInput.value}` : '/events';
+
+  fetch(url, {
+    method: method,
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(eventData),
+  })
+    .then(res => res.json())
+    .then(updated => {
+      if (selectedEvent) {
+        // Редакция на съществуващо събитие
+        selectedEvent.setProp('title', updated.title);
+        selectedEvent.setStart(updated.start);
+        selectedEvent.setEnd(updated.end);
+        selectedEvent.setProp('url', updated.url);
+        selectedEvent.setProp('backgroundColor', categoryColors[updated.category] || '#b2bec3');
+        selectedEvent.setProp('borderColor', categoryColors[updated.category] || '#b2bec3');
+        selectedEvent.setExtendedProp('category', updated.category);
+        selectedEvent.setExtendedProp('location', updated.location);
+        selectedEvent.setExtendedProp('organizer', updated.organizer);
+        selectedEvent.setExtendedProp('description', updated.description);
+      } else {
+        // Добавяне на ново събитие
+        calendar.addEvent({
+          ...updated,
+          backgroundColor: categoryColors[updated.category] || '#b2bec3',
+          borderColor: categoryColors[updated.category] || '#b2bec3',
+          extendedProps: {
+            category: updated.category || '',
+            location: updated.location || '',
+            organizer: updated.organizer || '',
+            description: updated.description || ''
+          }
+        });
+      }
+      closeModal();
+    })
+    .catch(err => {
+      console.error('Error saving event:', err);
     });
 });

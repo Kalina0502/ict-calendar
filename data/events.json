@@ -80,5 +80,27 @@
     "organizer": "partner",
     "description": "Technology exhibition with over 100 vendors",
     "url": "https://ictclustervarna.com/news/tech-expo"
+  },
+  {
+    "id": 1746690463415,
+    "title": "AI",
+    "start": "2025-05-12T09:00",
+    "end": "2025-05-16T13:00",
+    "category": "training",
+    "location": "Varna",
+    "organizer": "ict",
+    "url": "",
+    "description": "dasxcdascd"
+  },
+  {
+    "id": 1746692499748,
+    "title": "dasda",
+    "start": "2025-05-10T11:21",
+    "end": "",
+    "category": "monthly",
+    "location": "",
+    "organizer": "",
+    "url": "",
+    "description": ""
   }
 ]

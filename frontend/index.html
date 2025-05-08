@@ -54,6 +54,8 @@
 
       <button onclick="printView()">🖨 Print</button>
       <button onclick="exportToPDF()">📄 Export PDF</button>
+      <button id="addEventBtn">Add Event</button>
+
     </div>
 
     <div id="calendar"></div>
@@ -61,8 +63,50 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
 
-    <script src="main.js"></script>
   </div>
+
+  <!-- Modal за редакция/добавяне -->
+  <div id="eventModal" class="modal">
+    <div class="modal-content">
+      <span class="close-button">&times;</span>
+      <h2 id="modalTitle">Edit Event</h2>
+
+      <form id="eventForm">
+        <input type="hidden" id="eventId" />
+        <label>Title:</label>
+        <input type="text" id="title" required />
+
+        <label>Start Date:</label>
+        <input type="datetime-local" id="start" required />
+
+        <label>End Date:</label>
+        <input type="datetime-local" id="end" />
+
+        <label>Category:</label>
+        <select id="category">
+          <option value="monthly">Monthly</option>
+          <option value="internal">Internal</option>
+          <option value="partner">Partner</option>
+          <option value="training">Training</option>
+        </select>
+
+        <label>Location:</label>
+        <input type="text" id="location" />
+
+        <label>Organizer:</label>
+        <input type="text" id="organizer" />
+
+        <label>URL:</label>
+        <input type="url" id="url" />
+
+        <label>Description:</label>
+        <textarea id="description"></textarea>
+
+        <button type="submit" id="saveBtn">Save</button>
+      </form>
+    </div>
+  </div>
+  <script src="main.js"></script>
 </body>
 
 </html>
