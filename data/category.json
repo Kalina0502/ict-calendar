@@ -1,0 +1,18 @@
+[
+    {
+        "value": "monthly",
+        "label": "Monthly"
+    },
+    {
+        "value": "internal",
+        "label": "Internal"
+    },
+    {
+        "value": "partner",
+        "label": "Partner"
+    },
+    {
+        "value": "training",
+        "label": "Training"
+    }
+]
