@@ -16,12 +16,6 @@ body {
     padding: 20px;
 }
 
-/* Календар */
-#calendar-layout {
-    display: flex;
-    gap: 30px;
-}
-
 #calendar {
     flex: 1;
     background-color: var(--white);
@@ -30,11 +24,6 @@ body {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
     min-width: 600px;
 }
-
-#categoryFilter {
-    margin-bottom: 20px;
-}
-
 
 /*  Събития */
 .fc-event {
@@ -164,7 +153,6 @@ body {
     transform: scale(0.97);
 }
 
-
 /* Responsive адаптация */
 @media (max-width: 768px) {
     #calendar-layout {
@@ -176,8 +164,6 @@ body {
         width: 100%;
     }
 }
-
-
 
 /* Add/Edit/Delete buttons */
 .modal {
@@ -218,16 +204,7 @@ body {
     border-radius: 4px;
 }
 
-.modal-content button {
-    margin-top: 15px;
-    padding: 10px 15px;
-    background-color: var(--main-blue);
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
+/* Close button */
 .close-button {
     position: absolute;
     top: 8px;
@@ -236,40 +213,36 @@ body {
     cursor: pointer;
 }
 
-#saveEventBtn {
-    background-color: #0066cc;
-    color: white;
-    border: none;
-    border-radius: 6px;
+/* Unified button style */
+.modal-btn {
     padding: 8px 14px;
     font-size: 1rem;
     font-weight: 500;
+    border: none;
+    border-radius: 6px;
+    color: white;
     cursor: pointer;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
     transition: background-color 0.3s ease, transform 0.2s ease;
-  }
-  
-  #saveEventBtn:hover {
+    margin-top: 10px;
+}
+
+/* Save button */
+#saveEventBtn.modal-btn {
+    background-color: var(--main-blue);
+}
+
+#saveEventBtn.modal-btn:hover {
     background-color: #004a99;
     transform: scale(1.05);
-  }
-  
+}
 
-#deleteEventBtn {
+/* Delete button */
+#deleteEventBtn.modal-btn {
     background-color: #e74c3c;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    padding: 8px 14px;
-    font-size: 1rem;
-    font-weight: 500;
-    cursor: pointer;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-    transition: background-color 0.3s ease, transform 0.2s ease;
-  }
-  
-  #deleteEventBtn:hover {
+}
+
+#deleteEventBtn.modal-btn:hover {
     background-color: #c0392b;
     transform: scale(1.05);
-  }
-  
+}
