@@ -182,6 +182,27 @@ window.addEventListener('click', e => {
   if (e.target === modal) closeModal();
 });
 
+// Delete event
+const deleteBtn = document.getElementById('deleteEventBtn');
+
+deleteBtn.addEventListener('click', function () {
+  if (!selectedEvent || !selectedEvent.id) return;
+
+  const confirmDelete = confirm("Are you sure you want to delete this event?");
+  if (!confirmDelete) return;
+
+  fetch(`/events/${selectedEvent.id}`, { method: 'DELETE' })
+    .then(res => {
+      if (res.status === 204) {
+        selectedEvent.remove();
+        closeModal();
+      } else {
+        alert('Failed to delete the event.');
+      }
+    })
+    .catch(err => console.error('Delete error:', err));
+});
+
 form.addEventListener('submit', function (e) {
   e.preventDefault();
 
