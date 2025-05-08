@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  fetch('../data/events.json')
+  fetch('/events')
     .then(response => response.json())
     .then(events => {
       allEvents = events;
