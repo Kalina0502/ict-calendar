@@ -1,0 +1,37 @@
+{
+  "name": "ict-calendar",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@fullcalendar/core": "^6.1.17",
+    "@fullcalendar/daygrid": "^6.1.17",
+    "@fullcalendar/google-calendar": "^6.1.17",
+    "@fullcalendar/interaction": "^6.1.17",
+    "@fullcalendar/list": "^6.1.17",
+    "@fullcalendar/rrule": "^6.1.17",
+    "@fullcalendar/timegrid": "^6.1.17",
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "fs": "^0.0.1-security",
+    "googleapis": "^148.0.0",
+    "ics": "^3.8.1",
+    "open": "^10.1.2",
+    "rrule": "^2.8.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kalina0502/ict-calendar.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Kalina0502/ict-calendar/issues"
+  },
+  "homepage": "https://github.com/Kalina0502/ict-calendar#readme",
+  "description": ""
+}

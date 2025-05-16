@@ -1,0 +1,50 @@
+[
+  {
+    "id": "gcal_gj32ehbo4f0si8t8pl2fmibr00",
+    "title": "Test_1",
+    "start": "2025-05-20T10:00:00+03:00",
+    "end": "2025-05-21T00:00:00+03:00",
+    "location": "",
+    "description": "",
+    "organizer": "72cec69bfb7db847af7982f0e16403e945e756bfcb6842f706203efa26e25a22@group.calendar.google.com",
+    "category": "external",
+    "url": "https://www.google.com/calendar/event?eid=Z2ozMmVoYm80ZjBzaTh0OHBsMmZtaWJyMDAgNzJjZWM2OWJmYjdkYjg0N2FmNzk4MmYwZTE2NDAzZTk0NWU3NTZiZmNiNjg0MmY3MDYyMDNlZmEyNmUyNWEyMkBn",
+    "source": "google"
+  },
+  {
+    "id": "gcal_ccateapcel9rffebbfab7vmpmg",
+    "title": "Approved",
+    "start": "2025-05-27T09:00:00+03:00",
+    "end": "2025-05-29T00:00:00+03:00",
+    "location": "",
+    "description": "",
+    "organizer": "72cec69bfb7db847af7982f0e16403e945e756bfcb6842f706203efa26e25a22@group.calendar.google.com",
+    "category": "external",
+    "url": "https://www.google.com/calendar/event?eid=Y2NhdGVhcGNlbDlyZmZlYmJmYWI3dm1wbWcgNzJjZWM2OWJmYjdkYjg0N2FmNzk4MmYwZTE2NDAzZTk0NWU3NTZiZmNiNjg0MmY3MDYyMDNlZmEyNmUyNWEyMkBn",
+    "source": "google"
+  },
+  {
+    "id": "gcal_2jkrnj6dvgtuampv77j00339bt",
+    "title": "Link Test",
+    "start": "2025-05-21",
+    "end": "2025-05-22",
+    "location": "ul. \"Stara Planina\" 68, Hristo BotevOdesos, ul. \"Stara Planina\" 68, 9000 Varna, Bulgaria",
+    "description": "<a href=\"https://ictclustervarna.com/\">https://ictclustervarna.com/</a>",
+    "organizer": "72cec69bfb7db847af7982f0e16403e945e756bfcb6842f706203efa26e25a22@group.calendar.google.com",
+    "category": "external",
+    "url": "https://www.google.com/calendar/event?eid=Mmprcm5qNmR2Z3R1YW1wdjc3ajAwMzM5YnQgNzJjZWM2OWJmYjdkYjg0N2FmNzk4MmYwZTE2NDAzZTk0NWU3NTZiZmNiNjg0MmY3MDYyMDNlZmEyNmUyNWEyMkBn",
+    "source": "google"
+  },
+  {
+    "id": "gcal_jhjlqmjmu13she3lhev6t16p0o",
+    "title": "TEST",
+    "start": "2025-05-28T09:00:00+03:00",
+    "end": "2025-05-29T10:00:00+03:00",
+    "location": "",
+    "description": "",
+    "organizer": "72cec69bfb7db847af7982f0e16403e945e756bfcb6842f706203efa26e25a22@group.calendar.google.com",
+    "category": "external",
+    "url": "https://www.google.com/calendar/event?eid=amhqbHFtam11MTNzaGUzbGhldjZ0MTZwMG8gNzJjZWM2OWJmYjdkYjg0N2FmNzk4MmYwZTE2NDAzZTk0NWU3NTZiZmNiNjg0MmY3MDYyMDNlZmEyNmUyNWEyMkBn",
+    "source": "google"
+  }
+]
