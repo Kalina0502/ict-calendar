@@ -130,6 +130,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
           // Save event globally for editing
           window.selectedEvent = event;
+          document.getElementById("googleCalBtn").href = generateGoogleCalendarLink(event);
+
         }
 
       });
@@ -219,12 +221,39 @@ document.addEventListener('DOMContentLoaded', function () {
       console.error('Error loading events:', error);
     });
 
+  // function mapEvents(eventArray) {
+  //   return eventArray.map(event => {
+  //     const color = categoryColors[event.category] || '#b2bec3';
+
+  //     return {
+  //       ...event,
+  //       backgroundColor: color,
+  //       borderColor: color,
+  //       extendedProps: {
+  //         category: event.category || '',
+  //         location: event.location || '',
+  //         organizer: event.organizer || '',
+  //         description: event.description || ''
+  //       }
+  //     };
+  //   });
+  // }
+
   function mapEvents(eventArray) {
     return eventArray.map(event => {
       const color = categoryColors[event.category] || '#b2bec3';
 
+      const isAllDay = event.start.length === 10;
+      const startDate = new Date(event.start);
+      const endDate = new Date(event.end);
+      console.log(startDate.toISOString());
+
+
       return {
         ...event,
+        start: startDate,
+        end: endDate,
+        allDay: isAllDay,
         backgroundColor: color,
         borderColor: color,
         extendedProps: {
@@ -236,6 +265,7 @@ document.addEventListener('DOMContentLoaded', function () {
       };
     });
   }
+
 });
 
 //Close preview section
@@ -271,22 +301,13 @@ function closeModal() {
   selectedEvent = null;
 }
 
-closeBtn.addEventListener('click', closeModal);
+if (closeBtn) {
+  closeBtn.addEventListener('click', closeModal);
+}
+
 window.addEventListener('click', e => {
   if (e.target === modal) closeModal();
 });
-
-function exportICS() {
-  fetch('/generate-ics')
-    .then(res => res.blob())
-    .then(blob => {
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'calendar.ics';
-      a.click();
-    });
-}
 
 function linkify(inputText) {
   let replacedText = inputText;
@@ -304,4 +325,43 @@ function linkify(inputText) {
   replacedText = replacedText.replace(emailPattern, '<a href="mailto:$1">$1</a>');
 
   return replacedText;
+}
+
+function generateGoogleCalendarLink(event) {
+  const { title, start, end, extendedProps, allDay } = event;
+
+  const pad = (num) => String(num).padStart(2, '0');
+
+  const formatDateOnly = (date) =>
+    date.getFullYear() +
+    pad(date.getMonth() + 1) +
+    pad(date.getDate());
+
+  const formatDateTime = (date) =>
+    date.getUTCFullYear() +
+    pad(date.getUTCMonth() + 1) +
+    pad(date.getUTCDate()) +
+    'T' +
+    pad(date.getUTCHours()) +
+    pad(date.getUTCMinutes()) +
+    '00Z';
+
+  let startStr, endStr;
+
+  if (event.allDay) {
+    startStr = formatDateOnly(start);
+    endStr = formatDateOnly(end);
+  } else {
+    startStr = formatDateTime(start);
+    endStr = formatDateTime(end);
+  }
+
+  const url = `https://calendar.google.com/calendar/render?action=TEMPLATE` +
+    `&text=${encodeURIComponent(title || '')}` +
+    `&dates=${startStr}/${endStr}` +
+    `&details=${encodeURIComponent(extendedProps?.description || '')}` +
+    `&location=${encodeURIComponent(extendedProps?.location || '')}` +
+    `&sf=true&output=xml`;
+
+  return url;
 }
