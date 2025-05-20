@@ -1,12 +1,7 @@
 let calendar;
 let allEvents = [];
 let selectedEvent = null;
-let categoryColors = {
-  monthly: "#6c5ce7",
-  internal: "#0984e3",
-  partner: "#00b894",
-  training: "#fdcb6e"
-};
+
 
 document.addEventListener('DOMContentLoaded', function () {
   const calendarEl = document.getElementById('calendar');
@@ -34,7 +29,20 @@ document.addEventListener('DOMContentLoaded', function () {
           minute: '2-digit',
           hour12: false
         },
-        events: mapEvents(allEvents),
+        eventDidMount: function (info) {
+          // наслагваме цветовете ръчно
+          if (info.event.backgroundColor) {
+            info.el.style.backgroundColor = info.event.backgroundColor;
+          }
+          if (info.event.borderColor) {
+            info.el.style.borderColor = info.event.borderColor;
+          }
+          if (info.event.textColor) {
+            info.el.style.color = info.event.textColor;
+          }
+        },
+
+
         eventClick: function (info) {
           info.jsEvent.preventDefault();
 
@@ -67,23 +75,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
           let timeRangeText = '';
           if (start && end) {
-            const isAllDay =
-              start.getHours() === 0 &&
-              start.getMinutes() === 0 &&
-              end.getHours() === 0 &&
-              end.getMinutes() === 0;
-
             const sameDay = start.toDateString() === end.toDateString();
-
-            if (isAllDay) {
-              timeRangeText = `${formatDate(start)}`;
-            } else if (sameDay) {
+            if (sameDay) {
               timeRangeText = `${formatDate(start)}, ${formatTime(start)} – ${formatTime(end)}`;
             } else {
-              timeRangeText = `${formatDate(start)}, ${formatTime(start)} - ${formatDate(end)}, ${formatTime(end)}`;
+              timeRangeText = `${formatDate(start)}, ${formatTime(start)} – ${formatDate(end)}, ${formatTime(end)}`;
             }
-          } else {
-            timeRangeText = 'No time info';
           }
 
           date.textContent = timeRangeText;
@@ -97,7 +94,6 @@ document.addEventListener('DOMContentLoaded', function () {
             const googleMapsLink = `https://www.google.com/maps/search/?api=1&query=${encodedLocation}`;
             location.innerHTML = `Location: <a href="${googleMapsLink}" target="_blank" rel="noopener noreferrer">${rawLocation}</a>`;
           }
-
 
           const rawDesc = event.extendedProps?.description || 'No description';
           const safeDesc = rawDesc.includes('<a ') ? rawDesc : linkify(rawDesc);
@@ -136,6 +132,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
       });
 
+      const processedEvents = mapEvents(events);
+      calendar.addEventSource(processedEvents);
       calendar.render();
 
       // [categoryFilter, locationFilter, organizerFilter, keywordFilter].forEach(el =>
@@ -221,51 +219,57 @@ document.addEventListener('DOMContentLoaded', function () {
       console.error('Error loading events:', error);
     });
 
-  // function mapEvents(eventArray) {
-  //   return eventArray.map(event => {
-  //     const color = categoryColors[event.category] || '#b2bec3';
-
-  //     return {
-  //       ...event,
-  //       backgroundColor: color,
-  //       borderColor: color,
-  //       extendedProps: {
-  //         category: event.category || '',
-  //         location: event.location || '',
-  //         organizer: event.organizer || '',
-  //         description: event.description || ''
-  //       }
-  //     };
-  //   });
-  // }
-
   function mapEvents(eventArray) {
+    const now = new Date();
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate()); // само датата, без час
+
     return eventArray.map(event => {
-      const color = categoryColors[event.category] || '#b2bec3';
-
-      const isAllDay = event.start.length === 10;
       const startDate = new Date(event.start);
-      const endDate = new Date(event.end);
-      console.log(startDate.toISOString());
+      let endDate = event.end ? new Date(event.end) : new Date(startDate);
 
+      if (isNaN(startDate) || isNaN(endDate)) {
+        console.warn('Invalid date:', event);
+        return null;
+      }
+
+      // Ако е all-day събитие от Google, end е +1 ден => изваждаме 1
+      if (!event.start.includes('T') && event.end && !event.end.includes('T')) {
+        endDate.setDate(endDate.getDate() - 1);
+      }
+
+      // Сравняваме само по дата (не часове)
+      const compareEnd = new Date(endDate.getFullYear(), endDate.getMonth(), endDate.getDate());
+
+      const isPast = compareEnd < today;
+
+      // const color = isPast ? '#dfe6e9' : '#0066cc';
+      // const textColor = isPast ? '#636e72' : '#ffffff';
+
+      const color = isPast ? '#b2bec3' : '#0066cc';  // ← по-тъмен сив
+      const textColor = isPast ? '#2d3436' : '#ffffff'; // ← по-тъмен текст
+
+      // console.log("EVENT DEBUG:", {
+      //   title: event.title,
+      //   start: event.start,
+      //   end: event.end,
+      //   color: isPast ? 'gray' : 'blue'
+      // });
 
       return {
         ...event,
         start: startDate,
         end: endDate,
-        allDay: isAllDay,
         backgroundColor: color,
         borderColor: color,
+        textColor,
         extendedProps: {
           category: event.category || '',
           location: event.location || '',
-          organizer: event.organizer || '',
           description: event.description || ''
         }
       };
-    });
+    }).filter(Boolean);
   }
-
 });
 
 //Close preview section
@@ -285,13 +289,13 @@ const form = document.getElementById('eventForm');
 const closeBtn = document.querySelector('.close-button');
 const modalTitle = document.getElementById('modalTitle');
 
-const idInput = document.getElementById('eventId');
+//const idInput = document.getElementById('eventId');
 const titleInput = document.getElementById('title');
 const startInput = document.getElementById('start');
 const endInput = document.getElementById('end');
-const categoryInput = document.getElementById('category');
+//const categoryInput = document.getElementById('category');
 const locationInput = document.getElementById('location');
-const organizerInput = document.getElementById('organizer');
+//const organizerInput = document.getElementById('organizer');
 const urlInput = document.getElementById('url');
 const descriptionInput = document.getElementById('description');
 
@@ -328,14 +332,9 @@ function linkify(inputText) {
 }
 
 function generateGoogleCalendarLink(event) {
-  const { title, start, end, extendedProps, allDay } = event;
+  const { title, start, end, extendedProps } = event;
 
   const pad = (num) => String(num).padStart(2, '0');
-
-  const formatDateOnly = (date) =>
-    date.getFullYear() +
-    pad(date.getMonth() + 1) +
-    pad(date.getDate());
 
   const formatDateTime = (date) =>
     date.getUTCFullYear() +
@@ -346,22 +345,13 @@ function generateGoogleCalendarLink(event) {
     pad(date.getUTCMinutes()) +
     '00Z';
 
-  let startStr, endStr;
+  const startStr = formatDateTime(new Date(start));
+  const endStr = formatDateTime(new Date(end));
 
-  if (event.allDay) {
-    startStr = formatDateOnly(start);
-    endStr = formatDateOnly(end);
-  } else {
-    startStr = formatDateTime(start);
-    endStr = formatDateTime(end);
-  }
-
-  const url = `https://calendar.google.com/calendar/render?action=TEMPLATE` +
+  return `https://calendar.google.com/calendar/render?action=TEMPLATE` +
     `&text=${encodeURIComponent(title || '')}` +
     `&dates=${startStr}/${endStr}` +
     `&details=${encodeURIComponent(extendedProps?.description || '')}` +
     `&location=${encodeURIComponent(extendedProps?.location || '')}` +
     `&sf=true&output=xml`;
-
-  return url;
 }

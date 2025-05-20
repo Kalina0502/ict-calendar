@@ -6,62 +6,65 @@
     --text-dark: #222;
 }
 
-body, html {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: sans-serif;
-  background-color: #f5f6fa;
+body,
+html {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+    background-color: #f5f6fa;
 }
 
 #calendar-wrapper {
-max-width: 1100px;
-  margin: 40px auto;
-  padding: 20px;
-  background-color: #fff;
-  border-radius: 12px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
-  overflow: visible;
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+    overflow: visible;
 }
 
 #calendar {
-  background-color: white;
-  padding: 10px;
-  border-radius: 12px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-  width: 100%;
-  min-height: 80vh;
-  overflow-x: auto;
+    background-color: white;
+    padding: 10px;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    width: 100%;
+    min-height: 80vh;
+    overflow-x: auto;
 }
 
 .fc .fc-daygrid-day-frame {
-  min-height: 70px;
+    min-height: 70px;
 }
 
 @media (max-width: 768px) {
-  .fc-event {
-    font-size: 11px;
-  }
+    .fc-event {
+        font-size: 11px;
+    }
 
-  .fc-toolbar-title {
-    font-size: 1.1rem;
-  }
+    .fc-toolbar-title {
+        font-size: 1.1rem;
+    }
 
-  .fc .fc-daygrid-day-frame {
-    min-height: 50px;
-  }
+    .fc .fc-daygrid-day-frame {
+        min-height: 50px;
+    }
 }
 
 /*  Events */
-.fc-event {
-    background-color: var(--main-blue) !important;
+/* .fc-event {
+    background-color: var(--main-blue);
     color: var(--white) !important;
     border: none !important;
     border-radius: 4px;
     padding: 2px 4px;
     font-size: 0.85rem;
     transition: background-color 0.3s ease;
-}
+} */
+
+
 
 .fc-event:hover {
     background-color: var(--accent-blue) !important;
@@ -99,6 +102,15 @@ max-width: 1100px;
 .fc-toolbar-chunk .fc-button:not(:last-child) {
     margin-right: 5px;
 }
+
+.fc-event-time {
+  font-weight: 600 !important;
+}
+
+.fc-event-title {
+  font-weight: 700 !important; /* или просто normal */
+}
+
 
 @media print {
 
