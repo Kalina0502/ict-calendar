@@ -54,18 +54,6 @@ html {
 }
 
 /*  Events */
-/* .fc-event {
-    background-color: var(--main-blue);
-    color: var(--white) !important;
-    border: none !important;
-    border-radius: 4px;
-    padding: 2px 4px;
-    font-size: 0.85rem;
-    transition: background-color 0.3s ease;
-} */
-
-
-
 .fc-event:hover {
     background-color: var(--accent-blue) !important;
     cursor: pointer;
@@ -108,7 +96,7 @@ html {
 }
 
 .fc-event-title {
-  font-weight: 700 !important; /* или просто normal */
+  font-weight: 700 !important; 
 }
 
 
@@ -121,44 +109,6 @@ html {
         display: none !important;
     }
 }
-
-/* Container for filters */
-/* Layout: лява колона (филтри) + дясна (календар) */
-/* #calendar-layout {
-    display: flex;
-    gap: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-    align-items: flex-start;
-    flex-wrap: wrap;
-} */
-
-/* Filters - left column */
-/* #filters {
-    flex: 0 0 250px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    background: #f8f9fa;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    padding: 16px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-    font-family: Arial, sans-serif;
-    margin-top: 100px;
-} */
-
-/* Селекти, текстово поле */
-/* #filters select,
-#filters input[type="text"] {
-    padding: 6px 10px;
-    font-size: 0.95rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background-color: white;
-    transition: border-color 0.2s;
-} */
 
 #filters select:focus,
 #filters input[type="text"]:focus {

@@ -5,11 +5,6 @@ let selectedEvent = null;
 
 document.addEventListener('DOMContentLoaded', function () {
   const calendarEl = document.getElementById('calendar');
-  // const categoryFilter = document.getElementById('categoryFilter');
-  // const locationFilter = document.getElementById('locationFilter');
-  // const organizerFilter = document.getElementById('organizerFilter');
-  // const keywordFilter = document.getElementById('keywordFilter');
-
   fetch('/events')
     .then(response => response.json())
     .then(events => {
@@ -30,7 +25,6 @@ document.addEventListener('DOMContentLoaded', function () {
           hour12: false
         },
         eventDidMount: function (info) {
-          // наслагваме цветовете ръчно
           if (info.event.backgroundColor) {
             info.el.style.backgroundColor = info.event.backgroundColor;
           }
@@ -41,7 +35,6 @@ document.addEventListener('DOMContentLoaded', function () {
             info.el.style.color = info.event.textColor;
           }
         },
-
 
         eventClick: function (info) {
           info.jsEvent.preventDefault();
@@ -105,7 +98,6 @@ document.addEventListener('DOMContentLoaded', function () {
             link.setAttribute('rel', 'noopener noreferrer');
           });
 
-          // === Позициониране в рамките на прозореца ===
           const popupWidth = 300;
           const popupHeight = 180;
 
@@ -124,50 +116,18 @@ document.addEventListener('DOMContentLoaded', function () {
           preview.style.top = `${top}px`;
           preview.classList.add('show');
 
-          // Save event globally for editing
           window.selectedEvent = event;
           document.getElementById("googleCalBtn").href = generateGoogleCalendarLink(event);
-
         }
-
       });
-
       const processedEvents = mapEvents(events);
       calendar.addEventSource(processedEvents);
       calendar.render();
 
-      // [categoryFilter, locationFilter, organizerFilter, keywordFilter].forEach(el =>
-      //   el.addEventListener('input', filterEvents)
-      // );
-
-      // function filterEvents() {
-      //   const category = categoryFilter.value.toLowerCase();
-      //   const location = locationFilter.value.toLowerCase();
-      //   const organizer = organizerFilter.value.toLowerCase();
-      //   const search = keywordFilter.value.toLowerCase();
-
-      //   const filtered = allEvents.filter(ev => {
-      //     return (
-      //       (category === 'all' || (ev.category || '').toLowerCase() === category) &&
-      //       (location === 'all' || (ev.location || '').toLowerCase() === location) &&
-      //       (organizer === 'all' || (ev.organizer || '').toLowerCase() === organizer) &&
-      //       (search === '' || ev.title.toLowerCase().includes(search) || (ev.description || '').toLowerCase().includes(search))
-      //     );
-      //   });
-
-      //   calendar.removeAllEvents();
-      //   calendar.addEventSource(mapEvents(filtered));
-      // }
       // === Слушатели за иконки в popup-а ===//
       document.getElementById('closePreview').addEventListener('click', () => {
         document.getElementById('eventPreview').classList.remove('show');
       });
-
-      // document.getElementById('editEventBtn').addEventListener('click', () => {
-      //   document.getElementById('eventPreview').classList.remove('show');
-      //   openEditModal(window.selectedEvent);
-      // });
-
 
       // window.printView = function () {
       //   window.print();
@@ -221,7 +181,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function mapEvents(eventArray) {
     const now = new Date();
-    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate()); // само датата, без час
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
 
     return eventArray.map(event => {
       const startDate = new Date(event.start);
@@ -232,28 +192,13 @@ document.addEventListener('DOMContentLoaded', function () {
         return null;
       }
 
-      // Ако е all-day събитие от Google, end е +1 ден => изваждаме 1
-      if (!event.start.includes('T') && event.end && !event.end.includes('T')) {
-        endDate.setDate(endDate.getDate() - 1);
-      }
-
       // Сравняваме само по дата (не часове)
       const compareEnd = new Date(endDate.getFullYear(), endDate.getMonth(), endDate.getDate());
 
       const isPast = compareEnd < today;
 
-      // const color = isPast ? '#dfe6e9' : '#0066cc';
-      // const textColor = isPast ? '#636e72' : '#ffffff';
-
-      const color = isPast ? '#b2bec3' : '#0066cc';  // ← по-тъмен сив
-      const textColor = isPast ? '#2d3436' : '#ffffff'; // ← по-тъмен текст
-
-      // console.log("EVENT DEBUG:", {
-      //   title: event.title,
-      //   start: event.start,
-      //   end: event.end,
-      //   color: isPast ? 'gray' : 'blue'
-      // });
+      const color = isPast ? '#b2bec3' : '#0066cc'; 
+      const textColor = isPast ? '#2d3436' : '#ffffff'; 
 
       return {
         ...event,
@@ -289,13 +234,10 @@ const form = document.getElementById('eventForm');
 const closeBtn = document.querySelector('.close-button');
 const modalTitle = document.getElementById('modalTitle');
 
-//const idInput = document.getElementById('eventId');
 const titleInput = document.getElementById('title');
 const startInput = document.getElementById('start');
 const endInput = document.getElementById('end');
-//const categoryInput = document.getElementById('category');
 const locationInput = document.getElementById('location');
-//const organizerInput = document.getElementById('organizer');
 const urlInput = document.getElementById('url');
 const descriptionInput = document.getElementById('description');
 
