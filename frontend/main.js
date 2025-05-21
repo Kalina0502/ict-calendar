@@ -45,7 +45,8 @@ document.addEventListener('DOMContentLoaded', function () {
           const title = document.getElementById('previewTitle');
           const date = document.getElementById('previewDate');
           const location = document.getElementById('previewLocation');
-          const description = document.getElementById('previewOrganizer');
+          // const description = document.getElementById('previewOrganizer');
+          const description = document.getElementById('previewDescription');
 
           title.textContent = event.title || 'Untitled Event';
 
@@ -92,6 +93,16 @@ document.addEventListener('DOMContentLoaded', function () {
           const rawDesc = event.extendedProps?.description || 'No description';
           const safeDesc = rawDesc.includes('<a ') ? rawDesc : linkify(rawDesc);
           description.innerHTML = `Description: ${safeDesc}`;
+
+          const descEl = document.getElementById('previewDescription');
+          descEl.innerHTML = `<i class="fa-solid fa-align-left"></i> ${safeDesc}`;
+          descEl.classList.remove('expanded');
+          descEl.onclick = () => {
+            descEl.classList.toggle('expanded');
+          };
+
+
+
 
           // Open new tab
           description.querySelectorAll('a').forEach(link => {

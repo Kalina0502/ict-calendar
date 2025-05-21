@@ -155,6 +155,10 @@ html {
     pointer-events: none;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
     border: 1px solid #dadce0;
+
+    max-width: 420px;
+    /* или 90vw за мобилно */
+    width: fit-content;
 }
 
 #eventPreview.show {
@@ -225,6 +229,38 @@ html {
     color: #5f6368;
 }
 
+.preview-description {
+    max-width: calc(100% - 30px);
+    max-width: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    position: relative;
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: top;
+    word-break: break-word;
+}
+
+.preview-description.expanded {
+    white-space: normal;
+    max-width: 100%;
+}
+
+.preview-description::after {
+    content: '...';
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    padding-left: 10px;
+    background: linear-gradient(to right, transparent, #f1f3f4 80%);
+}
+
+.preview-description.expanded::after {
+    content: '';
+    background: none;
+}
+
 .event-header h3 {
     margin: 0;
     font-size: 16px;
@@ -260,7 +296,7 @@ html {
     }
 
     #eventPreview {
-        max-width: 95vw;
+        max-width: 90vw;
         padding: 12px;
         border-radius: 12px;
         font-size: 14px;
