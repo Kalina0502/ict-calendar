@@ -81,21 +81,20 @@ document.addEventListener('DOMContentLoaded', function () {
           date.textContent = timeRangeText;
 
           const rawLocation = event.extendedProps?.location || '-';
+          const locationEl = document.getElementById('previewLocation');
 
           if (rawLocation === '-') {
-            location.innerHTML = 'Location: -';
+            locationEl.innerHTML = `<i class="fa-solid fa-location-dot"></i> <strong>Location:</strong> -`;
           } else {
             const encodedLocation = encodeURIComponent(rawLocation);
             const googleMapsLink = `https://www.google.com/maps/search/?api=1&query=${encodedLocation}`;
-            location.innerHTML = `Location: <a href="${googleMapsLink}" target="_blank" rel="noopener noreferrer">${rawLocation}</a>`;
+            locationEl.innerHTML = `<i class="fa-solid fa-location-dot"></i> <strong>Location:</strong> <a href="${googleMapsLink}" target="_blank" rel="noopener noreferrer">${rawLocation}</a>`;
           }
 
           const rawDesc = event.extendedProps?.description || 'No description';
           const safeDesc = rawDesc.includes('<a ') ? rawDesc : linkify(rawDesc);
-          description.innerHTML = `Description: ${safeDesc}`;
-
           const descEl = document.getElementById('previewDescription');
-          descEl.innerHTML = `<i class="fa-solid fa-align-left"></i> ${safeDesc}`;
+          descEl.innerHTML = `<i class="fa-solid fa-align-left"></i> <strong>Description:</strong> ${safeDesc}`;
           descEl.classList.remove('expanded');
           descEl.onclick = () => {
             descEl.classList.toggle('expanded');

@@ -93,29 +93,33 @@ html {
 
 /* Print and Export PDF */
 /* #filters button {
-    background-color: var(--main-blue);
-    color: var(--white);
-    border: none;
-    border-radius: 6px;
-    font-size: 1rem;
-    font-weight: 500;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    padding: 7px 16px;
-} */
+  background-color: var(--main-blue);
+  color: var(--white);
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 500;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 7px 16px;
+}
+
+*/
 
 /* #filters button:hover {
-    background-color: var(--accent-blue);
-    transform: scale(1.05);
+  background-color: var(--accent-blue);
+  transform: scale(1.05);
 }
 
 #filters button:active {
-    transform: scale(0.97);
-} */
+  transform: scale(0.97);
+}
+
+*/
 
 /* Close button */
 .close-button {
@@ -155,10 +159,6 @@ html {
     pointer-events: none;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
     border: 1px solid #dadce0;
-
-    max-width: 420px;
-    /* или 90vw за мобилно */
-    width: fit-content;
 }
 
 #eventPreview.show {
@@ -222,43 +222,12 @@ html {
     color: #3c4043;
     margin-bottom: 5px;
     line-height: 1.4;
+    flex-wrap: wrap;
 }
 
 .event-body i {
     font-size: 14px;
     color: #5f6368;
-}
-
-.preview-description {
-    max-width: calc(100% - 30px);
-    max-width: 300px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    position: relative;
-    cursor: pointer;
-    display: inline-block;
-    vertical-align: top;
-    word-break: break-word;
-}
-
-.preview-description.expanded {
-    white-space: normal;
-    max-width: 100%;
-}
-
-.preview-description::after {
-    content: '...';
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    padding-left: 10px;
-    background: linear-gradient(to right, transparent, #f1f3f4 80%);
-}
-
-.preview-description.expanded::after {
-    content: '';
-    background: none;
 }
 
 .event-header h3 {
@@ -296,23 +265,10 @@ html {
     }
 
     #eventPreview {
-        max-width: 90vw;
+        max-width: 95vw;
         padding: 12px;
         border-radius: 12px;
         font-size: 14px;
-    }
-
-    .event-title {
-        font-size: 15px;
-    }
-
-    .event-body div {
-        font-size: 13px;
-        flex-wrap: wrap;
-    }
-
-    .preview-actions {
-        gap: 6px;
     }
 
     .preview-actions a,
@@ -324,11 +280,6 @@ html {
     .fc-toolbar {
         flex-direction: column;
         gap: 8px;
-    }
-
-    .fc-button {
-        font-size: 0.9rem !important;
-        padding: 5px 10px !important;
     }
 
     .fc .fc-button-group>.fc-button:not(:last-child) {
