@@ -142,6 +142,7 @@ document.addEventListener('DOMContentLoaded', function () {
           window.selectedEvent = event;
           document.getElementById("googleCalBtn").href = generateGoogleCalendarLink(event);
           document.getElementById("icsCalBtn").onclick = () => downloadEventAsICS(event);
+
         }
       });
       const processedEvents = mapEvents(events);
@@ -251,6 +252,15 @@ document.addEventListener('click', (e) => {
     preview.classList.remove('show');
   }
 });
+
+window.addEventListener('scroll', () => {
+  const preview = document.getElementById('eventPreview');
+  if (preview && preview.classList.contains('show')) {
+    preview.classList.remove('show');
+    lastOpenedEventId = null;
+  }
+});
+
 
 // ====== Modal logic ======
 const modal = document.getElementById('eventModal');
@@ -383,3 +393,36 @@ END:VCALENDAR`;
   link.click();
   document.body.removeChild(link);
 }
+
+function closePopupOnScroll() {
+  const preview = document.getElementById('eventPreview');
+  if (preview && preview.classList.contains('show')) {
+    preview.classList.remove('show');
+    lastOpenedEventId = null;
+  }
+}
+
+function closePopupOnScroll() {
+  const preview = document.getElementById('eventPreview');
+  if (preview && preview.classList.contains('show')) {
+    preview.classList.remove('show');
+    lastOpenedEventId = null;
+  }
+}
+
+function observeCalendarScrollContainer() {
+  const observer = new MutationObserver(() => {
+    const scrollAreas = document.querySelectorAll('.fc-scroller, .fc-timegrid-body, .fc-scrollgrid-sync-table, .fc-list-day-cushion');
+
+    scrollAreas.forEach(el => {
+      el.addEventListener('scroll', closePopupOnScroll, { passive: true });
+    });
+  });
+
+  observer.observe(document.getElementById('calendar'), {
+    childList: true,
+    subtree: true
+  });
+}
+
+observeCalendarScrollContainer();
