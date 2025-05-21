@@ -14,7 +14,9 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
   <!-- Export to My Calendar -->
-  <script src="https://cdn.jsdelivr.net/npm/ics@2.33.1/dist/ics.min.js"></script>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/ics@2.33.1/dist/ics.min.js"></script> -->
+   <script src="https://cdn.jsdelivr.net/npm/ics-js@0.10.0/dist/ics.deps.min.js"></script>
+
 
   <link rel="stylesheet" href="styles.css" />
 </head>
@@ -117,7 +119,9 @@
     <div class="event-header">
       <span id="previewTitle"></span>
       <div class="preview-icons">
+
         <a id="googleCalBtn" target="_blank">Добави в Google Calendar</a>
+        <button id="icsCalBtn">Изтегли като .ics</button>
         <button id="closePreview" title="Close"><i class="fas fa-times"></i></button>
       </div>
     </div>

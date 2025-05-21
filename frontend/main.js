@@ -1,6 +1,7 @@
 let calendar;
 let allEvents = [];
 let selectedEvent = null;
+let icsLib;
 
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -118,6 +119,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
           window.selectedEvent = event;
           document.getElementById("googleCalBtn").href = generateGoogleCalendarLink(event);
+          //   document.getElementById("icsCalBtn").onclick = () => generateICSFile(event);
+          document.getElementById("icsCalBtn").onclick = () => downloadEventAsICS(event);
+
+          //    document.downloadEventAsICS("icsCalBtn").href = downloadEventAsICS(event);
         }
       });
       const processedEvents = mapEvents(events);
@@ -197,8 +202,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
       const isPast = compareEnd < today;
 
-      const color = isPast ? '#b2bec3' : '#0066cc'; 
-      const textColor = isPast ? '#2d3436' : '#ffffff'; 
+      const color = isPast ? '#b2bec3' : '#0066cc';
+      const textColor = isPast ? '#2d3436' : '#ffffff';
 
       return {
         ...event,
@@ -296,4 +301,66 @@ function generateGoogleCalendarLink(event) {
     `&details=${encodeURIComponent(extendedProps?.description || '')}` +
     `&location=${encodeURIComponent(extendedProps?.location || '')}` +
     `&sf=true&output=xml`;
+}
+
+function downloadEventAsICS(event) {
+  const toIsoDate = (date) => {
+    const year = date.getUTCFullYear();
+    const month = String(date.getUTCMonth() + 1).padStart(2, '0');
+    const day = String(date.getUTCDate()).padStart(2, '0');
+    const hours = String(date.getUTCHours()).padStart(2, '0');
+    const minutes = String(date.getUTCMinutes()).padStart(2, '0');
+    const seconds = String(date.getUTCSeconds()).padStart(2, '0');
+    return year + month + day + 'T' + hours + minutes + seconds + 'Z';
+  };
+
+  const isAllDay = event.allDay ||
+    ((event.start instanceof Date) && event.start.getHours() === 0 && event.end && event.end.getHours() === 0);
+
+  let dtStartStr, dtEndStr;
+  if (isAllDay) {
+    const startYear = event.start.getFullYear();
+    const startMonth = String(event.start.getMonth() + 1).padStart(2, '0');
+    const startDay = String(event.start.getDate()).padStart(2, '0');
+    dtStartStr = `${startYear}${startMonth}${startDay}`;
+
+    const endYear = event.end.getFullYear();
+    const endMonth = String(event.end.getMonth() + 1).padStart(2, '0');
+    const endDay = String(event.end.getDate()).padStart(2, '0');
+    dtEndStr = `${endYear}${endMonth}${endDay}`;
+  } else {
+    dtStartStr = toIsoDate(event.start);
+    dtEndStr = toIsoDate(event.end);
+  }
+
+  // 2. Сглобяване на ICS съдържанието
+  const uid = event.id || Date.now();
+  const now = new Date();
+  const dtStampStr = toIsoDate(now);
+  let icsContent = `BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//MyCalendar//Events//BG
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:${uid}
+DTSTAMP:${dtStampStr}
+SUMMARY:${event.title || 'Без заглавие'}
+DESCRIPTION:${event.description || ''}
+LOCATION:${event.location || ''}
+DTSTART:${isAllDay ? dtStartStr : dtStartStr}
+DTEND:${isAllDay ? dtEndStr : dtEndStr}
+END:VEVENT
+END:VCALENDAR`;
+
+  icsContent = icsContent.replace(/\n/g, '\r\n');
+
+  // 3. Създаване на Blob и стартиране на изтеглянето
+  const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+  const link = document.createElement('a');
+  link.href = URL.createObjectURL(blob);
+  link.download = (event.title || 'event') + '.ics';
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
 }
