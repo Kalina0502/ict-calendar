@@ -52,6 +52,11 @@ html {
     font-family: 'Inter', sans-serif;
 }
 
+.fc-list-event:hover td {
+  color: #1a1a1a !important;
+  border-radius: 4px;
+}
+
 .fc-button {
     background-color: var(--main-blue) !important;
     color: var(--white) !important;
