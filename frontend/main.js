@@ -2,6 +2,7 @@ let calendar;
 let allEvents = [];
 let selectedEvent = null;
 let icsLib;
+let lastOpenedEventId = null;
 
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -39,6 +40,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
         eventClick: function (info) {
           info.jsEvent.preventDefault();
+
+          if (lastOpenedEventId === info.event.id) {
+            document.getElementById('eventPreview').classList.remove('show');
+            lastOpenedEventId = null;
+            return;
+          }
+          lastOpenedEventId = info.event.id;
 
           const event = info.event;
           const preview = document.getElementById('eventPreview');
@@ -94,17 +102,12 @@ document.addEventListener('DOMContentLoaded', function () {
           const rawDesc = event.extendedProps?.description || 'No description';
           const safeDesc = rawDesc.includes('<a ') ? rawDesc : linkify(rawDesc);
           const descEl = document.getElementById('previewDescription');
-
           descEl.innerHTML = `<span class="desc-label"><i class="fa-solid fa-align-left"></i> <strong>Description:</strong></span><span class="desc-text">${safeDesc}</span>`;
 
-         //  descEl.innerHTML = `<i class="fa-solid fa-align-left"></i> <strong>Description:</strong> ${safeDesc}`;
           descEl.classList.remove('expanded');
           descEl.onclick = () => {
             descEl.classList.toggle('expanded');
           };
-
-
-
 
           // Open new tab
           description.querySelectorAll('a').forEach(link => {
