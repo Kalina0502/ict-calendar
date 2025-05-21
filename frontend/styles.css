@@ -257,6 +257,44 @@ html {
     word-wrap: break-word;
 }
 
+.preview-description {
+  /* max-width: 50%;
+  max-height: 1.6em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: pointer;
+  display: inline-block;
+  vertical-align: top; */
+    display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 5px;
+  max-width: 100%;
+}
+
+.preview-description .desc-text {
+  max-width: 50%;
+  max-height: 1.6em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.preview-description.expanded .desc-text {
+  white-space: normal;
+  max-height: none;
+  max-width: 100%;
+}
+
+.preview-description.expanded {
+  white-space: normal;
+  max-height: none;
+  max-width: 100%;
+}
+
 @media (max-width: 768px) {
     #calendar-wrapper {
         margin: 20px 10px;

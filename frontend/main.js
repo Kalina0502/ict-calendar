@@ -94,7 +94,10 @@ document.addEventListener('DOMContentLoaded', function () {
           const rawDesc = event.extendedProps?.description || 'No description';
           const safeDesc = rawDesc.includes('<a ') ? rawDesc : linkify(rawDesc);
           const descEl = document.getElementById('previewDescription');
-          descEl.innerHTML = `<i class="fa-solid fa-align-left"></i> <strong>Description:</strong> ${safeDesc}`;
+
+          descEl.innerHTML = `<span class="desc-label"><i class="fa-solid fa-align-left"></i> <strong>Description:</strong></span><span class="desc-text">${safeDesc}</span>`;
+
+         //  descEl.innerHTML = `<i class="fa-solid fa-align-left"></i> <strong>Description:</strong> ${safeDesc}`;
           descEl.classList.remove('expanded');
           descEl.onclick = () => {
             descEl.classList.toggle('expanded');
