@@ -99,19 +99,25 @@ document.addEventListener('DOMContentLoaded', function () {
             link.setAttribute('rel', 'noopener noreferrer');
           });
 
-          const popupWidth = 300;
-          const popupHeight = 180;
+          const popupWidth = preview.offsetWidth;
+          const popupHeight = preview.offsetHeight;
 
-          let left = info.jsEvent.pageX + 10;
-          let top = info.jsEvent.pageY;
+          const margin = 10;
+          let left = info.jsEvent.pageX + margin;
+          let top = info.jsEvent.pageY + margin;
 
-          if (left + popupWidth > window.innerWidth) {
-            left = window.innerWidth - popupWidth - 10;
-          }
+          const viewportWidth = window.innerWidth;
+          const viewportHeight = window.innerHeight;
+          const scrollX = window.scrollX;
+          const scrollY = window.scrollY;
 
-          if (top + popupHeight > window.innerHeight + window.scrollY) {
-            top = window.innerHeight + window.scrollY - popupHeight - 10;
-          }
+          const maxLeft = scrollX + viewportWidth - popupWidth - margin;
+          const maxTop = scrollY + viewportHeight - popupHeight - margin;
+
+          if (left > maxLeft) left = maxLeft;
+          if (top > maxTop) top = maxTop;
+          if (left < scrollX + margin) left = scrollX + margin;
+          if (top < scrollY + margin) top = scrollY + margin;
 
           preview.style.left = `${left}px`;
           preview.style.top = `${top}px`;
@@ -119,10 +125,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
           window.selectedEvent = event;
           document.getElementById("googleCalBtn").href = generateGoogleCalendarLink(event);
-          //   document.getElementById("icsCalBtn").onclick = () => generateICSFile(event);
           document.getElementById("icsCalBtn").onclick = () => downloadEventAsICS(event);
-
-          //    document.downloadEventAsICS("icsCalBtn").href = downloadEventAsICS(event);
         }
       });
       const processedEvents = mapEvents(events);
