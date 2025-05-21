@@ -92,15 +92,15 @@ html {
 }
 
 .fc-event-time {
-  font-weight: 600 !important;
+    font-weight: 600 !important;
 }
 
 .fc-event-title {
-  font-weight: 700 !important; 
+    font-weight: 700 !important;
 }
 
 
-@media print {
+/* @media print {
 
     #filters,
     .fc-toolbar,
@@ -108,7 +108,7 @@ html {
     .fc-header-toolbar {
         display: none !important;
     }
-}
+} */
 
 #filters select:focus,
 #filters input[type="text"]:focus {
@@ -180,28 +180,85 @@ html {
 /*Event Preview Popup*/
 #eventPreview {
     position: absolute;
-    background: white;
-    padding: 16px;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    top: 0;
+    left: 0;
     z-index: 9999;
-    width: 280px;
-    font-family: sans-serif;
-    font-size: 14px;
-    display: none;
-    max-width: 90vw;
-    word-wrap: break-word;
+    background-color: #f1f3f4;
+    border-radius: 14px;
+    padding: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    font-family: 'Segoe UI', sans-serif;
+    transition: opacity 0.2s ease;
+    opacity: 0;
+    pointer-events: none;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+  border: 1px solid #dadce0; 
 }
 
 #eventPreview.show {
-    display: block;
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .event-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 8px;
+}
+
+.preview-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.preview-actions a,
+.preview-actions button {
+    font-size: 18px;
+    background: none;
+    border: none;
+    color: #444;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.preview-actions a:hover,
+.preview-actions button:hover {
+    color: #1a73e8;
+}
+
+.preview-close {
+    background: none;
+    border: none;
+    font-size: 20px;
+    color: #555;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 50%;
+    transition: background 0.2s ease;
+}
+
+.preview-close:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.event-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 12px 0 8px;
+    color: #202124;
+}
+
+.event-body div {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: #3c4043;
+}
+
+.event-body i {
+    font-size: 14px;
+    color: #5f6368;
 }
 
 .event-header h3 {

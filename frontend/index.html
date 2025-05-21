@@ -15,7 +15,7 @@
 
   <!-- Export to My Calendar -->
   <!-- <script src="https://cdn.jsdelivr.net/npm/ics@2.33.1/dist/ics.min.js"></script> -->
-   <script src="https://cdn.jsdelivr.net/npm/ics-js@0.10.0/dist/ics.deps.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/ics-js@0.10.0/dist/ics.deps.min.js"></script>
 
 
   <link rel="stylesheet" href="styles.css" />
@@ -115,7 +115,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
   <!-- Preview Event -->
-  <div id="eventPreview" class="event-preview hidden">
+  <!-- <div id="eventPreview" class="event-preview hidden">
     <div class="event-header">
       <span id="previewTitle"></span>
       <div class="preview-icons">
@@ -125,6 +125,30 @@
         <button id="closePreview" title="Close"><i class="fas fa-times"></i></button>
       </div>
     </div>
+    <div class="event-body">
+      <div id="previewDate"></div>
+      <div id="previewLocation"></div>
+      <div id="previewOrganizer"></div>
+    </div>
+  </div> -->
+
+  <div id="eventPreview" class="event-preview hidden">
+    <div class="event-header">
+      <div class="preview-actions">
+        <a id="googleCalBtn" title="Google Calendar" target="_blank">
+          <i class="fa-solid fa-calendar-plus"></i>
+        </a>
+        <button id="icsCalBtn" title="Download .ics">
+          <i class="fa-solid fa-download"></i>
+        </button>
+      </div>
+      <button id="closePreview" title="Close" class="preview-close">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+
+    <div class="event-title" id="previewTitle"></div>
+
     <div class="event-body">
       <div id="previewDate"></div>
       <div id="previewLocation"></div>
