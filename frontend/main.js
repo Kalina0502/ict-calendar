@@ -52,8 +52,6 @@ document.addEventListener('DOMContentLoaded', function () {
           const preview = document.getElementById('eventPreview');
           const title = document.getElementById('previewTitle');
           const date = document.getElementById('previewDate');
-          const location = document.getElementById('previewLocation');
-          // const description = document.getElementById('previewOrganizer');
           const description = document.getElementById('previewDescription');
 
           title.textContent = event.title || 'Untitled Event';
@@ -261,34 +259,6 @@ window.addEventListener('scroll', () => {
   }
 });
 
-
-// ====== Modal logic ======
-const modal = document.getElementById('eventModal');
-const form = document.getElementById('eventForm');
-const closeBtn = document.querySelector('.close-button');
-const modalTitle = document.getElementById('modalTitle');
-
-const titleInput = document.getElementById('title');
-const startInput = document.getElementById('start');
-const endInput = document.getElementById('end');
-const locationInput = document.getElementById('location');
-const urlInput = document.getElementById('url');
-const descriptionInput = document.getElementById('description');
-
-function closeModal() {
-  modal.style.display = 'none';
-  form.reset();
-  selectedEvent = null;
-}
-
-if (closeBtn) {
-  closeBtn.addEventListener('click', closeModal);
-}
-
-window.addEventListener('click', e => {
-  if (e.target === modal) closeModal();
-});
-
 function linkify(inputText) {
   let replacedText = inputText;
 
@@ -392,14 +362,6 @@ END:VCALENDAR`;
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
-}
-
-function closePopupOnScroll() {
-  const preview = document.getElementById('eventPreview');
-  if (preview && preview.classList.contains('show')) {
-    preview.classList.remove('show');
-    lastOpenedEventId = null;
-  }
 }
 
 function closePopupOnScroll() {
