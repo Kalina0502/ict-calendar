@@ -251,3 +251,55 @@ html {
     white-space: pre-wrap;
     word-wrap: break-word;
 }
+
+@media (max-width: 768px) {
+    #calendar-wrapper {
+        margin: 20px 10px;
+        padding: 10px;
+        border-radius: 8px;
+    }
+
+    #eventPreview {
+        max-width: 95vw;
+        padding: 12px;
+        border-radius: 12px;
+        font-size: 14px;
+    }
+
+    .event-title {
+        font-size: 15px;
+    }
+
+    .event-body div {
+        font-size: 13px;
+        flex-wrap: wrap;
+    }
+
+    .preview-actions {
+        gap: 6px;
+    }
+
+    .preview-actions a,
+    .preview-actions button,
+    .preview-close {
+        font-size: 16px;
+    }
+
+    .fc-toolbar {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .fc-button {
+        font-size: 0.9rem !important;
+        padding: 5px 10px !important;
+    }
+
+    .fc .fc-button-group>.fc-button:not(:last-child) {
+        margin-right: 3px;
+    }
+
+    .fc-daygrid-day-frame {
+        min-height: 50px;
+    }
+}
