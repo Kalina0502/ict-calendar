@@ -16,15 +16,15 @@ document.addEventListener('DOMContentLoaded', function () {
         initialView: 'dayGridMonth',
         height: 'parent',
         expandRows: true,
-        // headerToolbar: {
-        //   left: 'prev,next today',
-        //   center: 'title',
-        //   right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
-        // },
         headerToolbar: {
           left: ' ',
           center: 'title',
           right: ''
+        },
+        views: {
+          listMonth: {
+            buttonText: 'List'
+          }
         },
         eventTimeFormat: {
           hour: '2-digit',
@@ -172,7 +172,7 @@ document.addEventListener('DOMContentLoaded', function () {
         updateGliderPosition();
       }
 
-      ['radio-1', 'radio-2', 'radio-3'].forEach(id => {
+      ['radio-1', 'radio-2', 'radio-3', 'radio-4'].forEach(id => {
         document.getElementById(id).addEventListener('change', updateGliderPosition);
       });
 
@@ -185,6 +185,10 @@ document.addEventListener('DOMContentLoaded', function () {
       document.getElementById('radio-3').addEventListener('change', () => {
         calendar.changeView('timeGridDay');
       });
+      document.getElementById('radio-4').addEventListener('change', () => {
+        calendar.changeView('listMonth');
+      });
+
 
       const toolbarLeft = document.querySelector('.fc-toolbar .fc-toolbar-chunk:first-child');
       const navButtons = document.querySelector('#nav-buttons-hidden .nav-tabs');
@@ -202,13 +206,6 @@ document.addEventListener('DOMContentLoaded', function () {
       document.getElementById('nextBtn').addEventListener('click', () => {
         calendar.next();
       });
-
-
-
-
-
-
-
 
       const prevBtn = document.getElementById('prevBtn');
       const nextBtn = document.getElementById('nextBtn');
