@@ -32,16 +32,19 @@ document.addEventListener('DOMContentLoaded', function () {
           hour12: false
         },
         eventDidMount: function (info) {
-          if (info.event.backgroundColor) {
-            info.el.style.backgroundColor = info.event.backgroundColor;
+          const el = info.el;
+
+          if (info.event.backgroundColor === '#b2bec3') {
+            el.classList.add('past-event');
+          } else {
+            el.classList.add('current-event');
           }
-          if (info.event.borderColor) {
-            info.el.style.borderColor = info.event.borderColor;
-          }
-          if (info.event.textColor) {
-            info.el.style.color = info.event.textColor;
-          }
+
+          el.style.backgroundColor = '';
+          el.style.borderColor = '';
+          el.style.color = '';
         },
+
 
         eventClick: function (info) {
           info.jsEvent.preventDefault();
