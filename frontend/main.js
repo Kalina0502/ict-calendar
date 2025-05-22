@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function () {
         height: 'parent',
         expandRows: true,
         headerToolbar: {
-          left: ' ',
+          left: '',
           center: 'title',
           right: ''
         },
