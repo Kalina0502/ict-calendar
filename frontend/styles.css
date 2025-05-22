@@ -53,8 +53,8 @@ html {
 }
 
 .fc-list-event:hover td {
-  color: #1a1a1a !important;
-  border-radius: 4px;
+    color: #1a1a1a !important;
+    border-radius: 4px;
 }
 
 .fc-button {
@@ -271,7 +271,7 @@ html {
 }
 
 .preview-description {
-  /* max-width: 50%;
+    /* max-width: 50%;
   max-height: 1.6em;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -280,32 +280,147 @@ html {
   display: inline-block;
   vertical-align: top; */
     display: flex;
-  flex-wrap: wrap;
-  align-items: flex-start;
-  gap: 5px;
-  max-width: 100%;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 5px;
+    max-width: 100%;
 }
 
 .preview-description .desc-text {
-  max-width: 50%;
-  max-height: 1.6em;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  cursor: pointer;
-  transition: all 0.2s ease;
+    max-width: 50%;
+    max-height: 1.6em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: all 0.2s ease;
 }
 
 .preview-description.expanded .desc-text {
-  white-space: normal;
-  max-height: none;
-  max-width: 100%;
+    white-space: normal;
+    max-height: none;
+    max-width: 100%;
 }
 
 .preview-description.expanded {
-  white-space: normal;
-  max-height: none;
-  max-width: 100%;
+    white-space: normal;
+    max-height: none;
+    max-width: 100%;
+}
+
+/* Toolbar - Left/Right */
+.fc-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.fc-toolbar-title {
+    flex: 1;
+    font-size: 1.5rem;
+}
+
+.fc-custom-tabs {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.container {
+    position: relative;
+    display: flex;
+    background-color: #fff;
+    padding: 4px;
+    border-radius: 99px;
+    box-shadow: 0 0 1px rgba(24, 94, 224, 0.15), 0 6px 12px rgba(24, 94, 224, 0.15);
+    gap: 0.25rem;
+    min-width: 220px;
+    height: 38px;
+    align-items: center;
+}
+
+.tab {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    width: 70px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: black;
+    border-radius: 99px;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.tabs {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+}
+
+.container input[type="radio"] {
+    display: none;
+}
+
+.container input[type="radio"]:checked+label {
+    color: #185ee0;
+    font-weight: 600;
+}
+
+.glider {
+    position: absolute;
+    top: 4px;
+    left: 0;
+    height: 30px;
+    width: 70px;
+    background-color: #e6eef9;
+    border-radius: 99px;
+    transition: left 0.25s ease-in-out;
+    z-index: 1;
+}
+
+/* Left Buttons */
+.nav-tabs {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 99px;
+    box-shadow: 0 0 1px rgba(24, 94, 224, 0.15), 0 6px 12px rgba(24, 94, 224, 0.15);
+    padding: 4px;
+    gap: 6px;
+    height: 38px;
+}
+
+.nav-tab {
+    height: 30px;
+    padding: 0 14px;
+    background-color: transparent;
+    border: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    border-radius: 99px;
+    cursor: pointer;
+    color: #202124;
+    transition: background-color 0.2s ease;
+}
+
+.nav-tab.today {
+    background-color: #e6eef9;
+    color: #185ee0;
+    font-weight: 600;
+}
+
+.nav-tab:hover {
+    background-color: #f0f4fa;
+}
+
+.nav-tab.active {
+    background-color: #e6eef9;
+    color: #185ee0;
+    font-weight: 600;
 }
 
 @media (max-width: 768px) {

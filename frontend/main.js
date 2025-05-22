@@ -16,10 +16,15 @@ document.addEventListener('DOMContentLoaded', function () {
         initialView: 'dayGridMonth',
         height: 'parent',
         expandRows: true,
+        // headerToolbar: {
+        //   left: 'prev,next today',
+        //   center: 'title',
+        //   right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
+        // },
         headerToolbar: {
-          left: 'prev,next today',
+          left: ' ',
           center: 'title',
-          right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
+          right: ''
         },
         eventTimeFormat: {
           hour: '2-digit',
@@ -147,7 +152,107 @@ document.addEventListener('DOMContentLoaded', function () {
       calendar.addEventSource(processedEvents);
       calendar.render();
 
-      // === Слушатели за иконки в popup-а ===//
+
+      function updateGliderPosition() {
+        const activeTab = document.querySelector('.container input[type="radio"]:checked + label');
+        const glider = document.querySelector('.glider');
+        if (activeTab && glider) {
+          const offsetLeft = activeTab.offsetLeft;
+          const tabWidth = activeTab.offsetWidth;
+          glider.style.width = `${tabWidth}px`;
+          glider.style.transform = `translateX(${offsetLeft}px)`;
+        }
+      }
+
+      const toolbarRight = document.querySelector('.fc-toolbar .fc-toolbar-chunk:last-child');
+      const tabContainer = document.querySelector('.tabs');
+      if (toolbarRight && tabContainer) {
+        toolbarRight.appendChild(tabContainer);
+        tabContainer.style.display = "flex";
+        updateGliderPosition();
+      }
+
+      ['radio-1', 'radio-2', 'radio-3'].forEach(id => {
+        document.getElementById(id).addEventListener('change', updateGliderPosition);
+      });
+
+      document.getElementById('radio-1').addEventListener('change', () => {
+        calendar.changeView('dayGridMonth');
+      });
+      document.getElementById('radio-2').addEventListener('change', () => {
+        calendar.changeView('timeGridWeek');
+      });
+      document.getElementById('radio-3').addEventListener('change', () => {
+        calendar.changeView('timeGridDay');
+      });
+
+      const toolbarLeft = document.querySelector('.fc-toolbar .fc-toolbar-chunk:first-child');
+      const navButtons = document.querySelector('#nav-buttons-hidden .nav-tabs');
+      if (toolbarLeft && navButtons) {
+        toolbarLeft.appendChild(navButtons);
+        navButtons.style.display = "flex";
+      }
+
+      document.getElementById('prevBtn').addEventListener('click', () => {
+        calendar.prev();
+      });
+      document.getElementById('todayBtn').addEventListener('click', () => {
+        calendar.today();
+      });
+      document.getElementById('nextBtn').addEventListener('click', () => {
+        calendar.next();
+      });
+
+
+
+
+
+
+
+
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+      const todayBtn = document.getElementById('todayBtn');
+
+      function isTodayView() {
+        const currentDate = calendar.getDate();
+        const now = new Date();
+        return currentDate.getMonth() === now.getMonth() &&
+          currentDate.getFullYear() === now.getFullYear();
+      }
+
+      function updateActiveState(activeButton) {
+        prevBtn.classList.remove('active');
+        nextBtn.classList.remove('active');
+        todayBtn.classList.remove('active');
+
+        if (isTodayView()) {
+          todayBtn.classList.add('active');
+        } else {
+          activeButton?.classList.add('active');
+        }
+      }
+
+      updateActiveState();
+
+      // Слушатели
+      prevBtn.addEventListener('click', () => {
+        calendar.prev();
+        setTimeout(() => updateActiveState(prevBtn), 10);
+      });
+
+      nextBtn.addEventListener('click', () => {
+        calendar.next();
+        setTimeout(() => updateActiveState(nextBtn), 10);
+      });
+
+      todayBtn.addEventListener('click', () => {
+        calendar.today();
+        setTimeout(() => updateActiveState(), 10);
+      });
+
+
+      // Слушатели за иконки в popup-а
       document.getElementById('closePreview').addEventListener('click', () => {
         document.getElementById('eventPreview').classList.remove('show');
       });
