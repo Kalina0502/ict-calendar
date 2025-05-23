@@ -1,4 +1,19 @@
 @media (max-width: 768px) {
+
+    .fc-timegrid,
+    .fc-timegrid-body,
+    .fc-timegrid-slots,
+    .fc-scrollgrid-sync-table {
+        max-height: 70vh;
+        overflow-y: auto !important;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .fc-timegrid-slot {
+        min-height: 40px;
+        /* или по-малко, за по-компактен вид */
+    }
+
     #calendar-wrapper {
         margin: 20px 10px;
         padding: 10px;
