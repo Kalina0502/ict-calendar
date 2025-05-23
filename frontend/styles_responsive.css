@@ -22,7 +22,7 @@
         z-index: 9999;
         display: none;
     }
-    
+
     #eventPreview.show {
         display: block;
     }

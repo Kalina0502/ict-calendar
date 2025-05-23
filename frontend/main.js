@@ -124,9 +124,13 @@ document.addEventListener('DOMContentLoaded', function () {
           const calendarWrapper = document.getElementById('calendar-wrapper');
           const bounds = calendarWrapper.getBoundingClientRect();
 
+          preview.style.visibility = 'hidden';
           preview.style.display = 'block';
+
           const previewWidth = preview.offsetWidth;
           const previewHeight = preview.offsetHeight;
+
+          preview.style.visibility = '';
           preview.style.display = '';
 
           let left = info.jsEvent.clientX - bounds.left + 10;
