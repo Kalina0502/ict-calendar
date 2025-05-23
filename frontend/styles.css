@@ -1,3 +1,6 @@
+/* ===================================================
+     Colors and Variables
+=================================================== */
 :root {
     --main-blue: #0066cc;
     --accent-blue: #00aeef;
@@ -6,6 +9,9 @@
     --text-dark: #222;
 }
 
+/* ===================================================
+    Base HTML and Body Styles
+=================================================== */
 body,
 html {
     margin: 0;
@@ -15,6 +21,9 @@ html {
     background-color: #f5f6fa;
 }
 
+/* ===================================================
+    Calendar Wrapper and Container
+=================================================== */
 #calendar-wrapper {
     max-width: 1100px;
     margin: 40px auto;
@@ -39,7 +48,9 @@ html {
     min-height: 70px;
 }
 
-/*  Events */
+/* ===================================================
+   Events
+=================================================== */
 .fc-event {
     border-radius: 12px;
     padding: 2px 6px;
@@ -111,7 +122,9 @@ html {
 
 */
 
-/* Close button */
+/* ===================================================
+   Close Button
+=================================================== */
 .close-button {
     position: absolute;
     top: 8px;
@@ -120,7 +133,9 @@ html {
     cursor: pointer;
 }
 
-/* Unified button style */
+/* ===================================================
+   Unified Modal Buttons
+=================================================== */
 .modal-btn {
     padding: 8px 14px;
     font-size: 1rem;
@@ -134,7 +149,9 @@ html {
     margin-top: 10px;
 }
 
-/*Event Preview Popup*/
+/* ===================================================
+   Event Preview Popup
+=================================================== */
 #eventPreview {
     position: absolute;
     top: 0;
@@ -277,7 +294,9 @@ html {
     max-width: 100%;
 }
 
-/* Toolbar - Left/Right */
+/* ===================================================
+   Toolbar and Tabs
+=================================================== */
 .fc-toolbar {
     display: flex;
     align-items: center;
@@ -351,7 +370,9 @@ html {
     z-index: 1;
 }
 
-/* Left Buttons */
+/* ===================================================
+   Navigation Tabs (Left)
+=================================================== */
 .nav-tabs {
     display: flex;
     align-items: center;
@@ -392,6 +413,9 @@ html {
     font-weight: 600;
 }
 
+/* ===================================================
+   Responsive Styles
+=================================================== */
 @media (max-width: 768px) {
     #calendar-wrapper {
         margin: 20px 10px;
