@@ -121,25 +121,25 @@ document.addEventListener('DOMContentLoaded', function () {
             link.setAttribute('rel', 'noopener noreferrer');
           });
 
-          const popupWidth = preview.offsetWidth;
-          const popupHeight = preview.offsetHeight;
+          const calendarWrapper = document.getElementById('calendar-wrapper');
+          const bounds = calendarWrapper.getBoundingClientRect();
 
-          const margin = 10;
-          let left = info.jsEvent.pageX + margin;
-          let top = info.jsEvent.pageY + margin;
+          preview.style.display = 'block';
+          const previewWidth = preview.offsetWidth;
+          const previewHeight = preview.offsetHeight;
+          preview.style.display = '';
 
-          const viewportWidth = window.innerWidth;
-          const viewportHeight = window.innerHeight;
-          const scrollX = window.scrollX;
-          const scrollY = window.scrollY;
+          let left = info.jsEvent.clientX - bounds.left + 10;
+          let top = info.jsEvent.clientY - bounds.top + 10;
 
-          const maxLeft = scrollX + viewportWidth - popupWidth - margin;
-          const maxTop = scrollY + viewportHeight - popupHeight - margin;
-
-          if (left > maxLeft) left = maxLeft;
-          if (top > maxTop) top = maxTop;
-          if (left < scrollX + margin) left = scrollX + margin;
-          if (top < scrollY + margin) top = scrollY + margin;
+          if (left + previewWidth > bounds.width) {
+            left = bounds.width - previewWidth - 10;
+          }
+          if (top + previewHeight > bounds.height) {
+            top = bounds.height - previewHeight - 10;
+          }
+          if (left < 10) left = 10;
+          if (top < 10) top = 10;
 
           preview.style.left = `${left}px`;
           preview.style.top = `${top}px`;
