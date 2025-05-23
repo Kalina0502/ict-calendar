@@ -184,18 +184,25 @@ document.addEventListener('DOMContentLoaded', function () {
       });
 
       document.getElementById('radio-1').addEventListener('change', () => {
-        calendar.changeView('dayGridMonth');
+        calendar.changeView('dayGridMonth')
+        lastOpenedEventId = null;
+        document.getElementById('eventPreview')?.classList.remove('show');
       });
       document.getElementById('radio-2').addEventListener('change', () => {
-        calendar.changeView('timeGridWeek');
+        calendar.changeView('timeGridWeek')
+        lastOpenedEventId = null;
+        document.getElementById('eventPreview')?.classList.remove('show');
       });
       document.getElementById('radio-3').addEventListener('change', () => {
-        calendar.changeView('timeGridDay');
+        calendar.changeView('timeGridDay')
+        lastOpenedEventId = null;
+        document.getElementById('eventPreview')?.classList.remove('show');
       });
       document.getElementById('radio-4').addEventListener('change', () => {
-        calendar.changeView('listMonth');
+        calendar.changeView('listMonth')
+        lastOpenedEventId = null;
+        document.getElementById('eventPreview')?.classList.remove('show');
       });
-
 
       const toolbarLeft = document.querySelector('.fc-toolbar .fc-toolbar-chunk:first-child');
       const navButtons = document.querySelector('#nav-buttons-hidden .nav-tabs');
