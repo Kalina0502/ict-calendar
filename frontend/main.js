@@ -26,6 +26,24 @@ document.addEventListener('DOMContentLoaded', function () {
             buttonText: 'List'
           }
         },
+        // views: {
+        //   dayGridMonth: {
+        //     type: 'dayGridMonth',
+        //     dateIncrement: { months: 1 }
+        //   },
+        //   timeGridWeek: {
+        //     type: 'timeGridWeek',
+        //     dateIncrement: { weeks: 1 }
+        //   },
+        //   timeGridDay: {
+        //     type: 'timeGridDay',
+        //     dateIncrement: { days: 1 }
+        //   },
+        //   listMonth: {
+        //     buttonText: 'List'
+        //   }
+        // },
+
         eventTimeFormat: {
           hour: '2-digit',
           minute: '2-digit',
@@ -210,15 +228,33 @@ document.addEventListener('DOMContentLoaded', function () {
         toolbarLeft.appendChild(navButtons);
         navButtons.style.display = "flex";
       }
-
+      
       document.getElementById('prevBtn').addEventListener('click', () => {
-        calendar.prev();
+        const view = calendar.view.type;
+        if (view === 'dayGridMonth') {
+          calendar.incrementDate({ months: -1 });
+        } else if (view === 'timeGridWeek') {
+          calendar.incrementDate({ weeks: -1 });
+        } else if (view === 'timeGridDay') {
+          calendar.incrementDate({ days: -1 });
+        } else {
+          calendar.prev();
+        }
+        setTimeout(() => updateActiveState(prevBtn), 10);
       });
-      document.getElementById('todayBtn').addEventListener('click', () => {
-        calendar.today();
-      });
+
       document.getElementById('nextBtn').addEventListener('click', () => {
-        calendar.next();
+        const view = calendar.view.type;
+        if (view === 'dayGridMonth') {
+          calendar.incrementDate({ months: 1 });
+        } else if (view === 'timeGridWeek') {
+          calendar.incrementDate({ weeks: 1 });
+        } else if (view === 'timeGridDay') {
+          calendar.incrementDate({ days: 1 });
+        } else {
+          calendar.next();
+        }
+        setTimeout(() => updateActiveState(nextBtn), 10);
       });
 
       const prevBtn = document.getElementById('prevBtn');
@@ -246,22 +282,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
       updateActiveState();
 
-      // Слушатели
-      prevBtn.addEventListener('click', () => {
-        calendar.prev();
-        setTimeout(() => updateActiveState(prevBtn), 10);
-      });
-
-      nextBtn.addEventListener('click', () => {
-        calendar.next();
-        setTimeout(() => updateActiveState(nextBtn), 10);
-      });
-
+      // Слушател
       todayBtn.addEventListener('click', () => {
         calendar.today();
         setTimeout(() => updateActiveState(), 10);
       });
-
 
       // Слушатели за иконки в popup-а
       document.getElementById('closePreview').addEventListener('click', () => {
