@@ -224,6 +224,12 @@ html {
     color: #202124;
 }
 
+.preview-description.no-expand {
+  cursor: default !important;
+  pointer-events: none;
+}
+
+
 .event-body div {
     display: flex;
     align-items: center;

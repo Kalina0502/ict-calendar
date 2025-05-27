@@ -111,9 +111,20 @@ document.addEventListener('DOMContentLoaded', function () {
           descEl.innerHTML = `<span class="desc-label"><i class="fa-solid fa-align-left"></i> <strong>Description:</strong></span><span class="desc-text">${safeDesc}</span>`;
 
           descEl.classList.remove('expanded');
-          descEl.onclick = () => {
-            descEl.classList.toggle('expanded');
-          };
+          descEl.classList.remove('no-expand');
+
+          const hasDesc = rawDesc && rawDesc.trim() !== '' && rawDesc !== 'No description';
+
+          if (hasDesc) {
+            descEl.style.cursor = 'pointer';
+            descEl.onclick = () => {
+              descEl.classList.toggle('expanded');
+            };
+          } else {
+            descEl.classList.add('no-expand');
+            descEl.style.cursor = 'default';
+            descEl.onclick = null;
+          }
 
           // Open new tab
           description.querySelectorAll('a').forEach(link => {
