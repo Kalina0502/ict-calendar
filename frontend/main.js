@@ -94,15 +94,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
           date.textContent = timeRangeText;
 
-          const rawLocation = event.extendedProps?.location || '-';
+          const rawLocation = event.extendedProps?.location || '';
           const locationEl = document.getElementById('previewLocation');
 
-          if (rawLocation === '-') {
+          if (rawLocation.trim() === '') {
             locationEl.innerHTML = `<i class="fa-solid fa-location-dot"></i> <strong>Location:</strong> -`;
+            locationEl.style.cursor = 'default';
           } else {
             const encodedLocation = encodeURIComponent(rawLocation);
             const googleMapsLink = `https://www.google.com/maps/search/?api=1&query=${encodedLocation}`;
             locationEl.innerHTML = `<i class="fa-solid fa-location-dot"></i> <strong>Location:</strong> <a href="${googleMapsLink}" target="_blank" rel="noopener noreferrer">${rawLocation}</a>`;
+            locationEl.style.cursor = 'pointer';
           }
 
           const rawDesc = event.extendedProps?.description || 'No description';
