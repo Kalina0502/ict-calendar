@@ -26,24 +26,6 @@ document.addEventListener('DOMContentLoaded', function () {
             buttonText: 'List'
           }
         },
-        // views: {
-        //   dayGridMonth: {
-        //     type: 'dayGridMonth',
-        //     dateIncrement: { months: 1 }
-        //   },
-        //   timeGridWeek: {
-        //     type: 'timeGridWeek',
-        //     dateIncrement: { weeks: 1 }
-        //   },
-        //   timeGridDay: {
-        //     type: 'timeGridDay',
-        //     dateIncrement: { days: 1 }
-        //   },
-        //   listMonth: {
-        //     buttonText: 'List'
-        //   }
-        // },
-
         eventTimeFormat: {
           hour: '2-digit',
           minute: '2-digit',
@@ -228,7 +210,7 @@ document.addEventListener('DOMContentLoaded', function () {
         toolbarLeft.appendChild(navButtons);
         navButtons.style.display = "flex";
       }
-      
+
       document.getElementById('prevBtn').addEventListener('click', () => {
         const view = calendar.view.type;
         if (view === 'dayGridMonth') {
