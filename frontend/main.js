@@ -20,6 +20,17 @@ function debounce(fn, delay = 100) {
   };
 }
 
+function updateGliderPosition() {
+  const activeRadio = document.querySelector('input[name="view-option"]:checked');
+  const glider = document.querySelector('.glider');
+  if (activeRadio && glider) {
+    const rect = activeRadio.getBoundingClientRect();
+    glider.style.left = `${activeRadio.offsetLeft}px`;
+    glider.style.width = `${rect.width}px`;
+  }
+}
+
+
 document.addEventListener('DOMContentLoaded', function () {
   const calendarEl = document.getElementById('calendar');
   fetch('/events')
@@ -126,21 +137,29 @@ document.addEventListener('DOMContentLoaded', function () {
           const descEl = document.getElementById('previewDescription');
           descEl.innerHTML = `<span class="desc-label"><i class="fa-solid fa-align-left"></i> <strong>Description:</strong></span><span class="desc-text">${safeDesc}</span>`;
 
-          descEl.classList.remove('expanded');
-          descEl.classList.remove('no-expand');
+          // descEl.classList.remove('expanded');
+          // descEl.classList.remove('no-expand');
 
           const hasDesc = rawDesc && rawDesc.trim() !== '' && rawDesc !== 'No description';
 
           if (hasDesc) {
+            descEl.classList.remove('no-expand');
             descEl.style.cursor = 'pointer';
-            descEl.onclick = () => {
-              descEl.classList.toggle('expanded');
-            };
+
+            const newDescEl = descEl.cloneNode(true);
+            descEl.parentNode.replaceChild(newDescEl, descEl);
+
+            newDescEl.addEventListener('click', () => {
+              newDescEl.classList.toggle('expanded');
+              preview.classList.toggle('expanded');
+            });
           } else {
             descEl.classList.add('no-expand');
             descEl.style.cursor = 'default';
-            descEl.onclick = null;
+            descEl.classList.remove('expanded');
+            preview.classList.remove('expanded');
           }
+
 
           // Open new tab
           description.querySelectorAll('a').forEach(link => {
@@ -235,6 +254,10 @@ document.addEventListener('DOMContentLoaded', function () {
         toolbarLeft.appendChild(navButtons);
         navButtons.style.display = "flex";
       }
+
+      // Добавено: преизчисляване на календара и показване на контейнера
+      calendar.updateSize();  // принудително преначертаване на календара с новия layout
+      document.getElementById('calendar-wrapper').style.visibility = 'visible';
 
       document.getElementById('prevBtn').addEventListener('click', () => {
         const view = calendar.view.type;
@@ -525,5 +548,11 @@ function observeCalendarScrollContainer() {
     subtree: true
   });
 }
+
+window.addEventListener('resize', debounce(() => {
+  calendar.updateSize();
+  updateGliderPosition();
+}, 150));
+
 
 observeCalendarScrollContainer();

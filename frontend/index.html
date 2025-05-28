@@ -3,6 +3,7 @@
 
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="libs/fullcalendar/core/index.global.min.js"></script>
   <script src="libs/fullcalendar/core/locales-all.global.min.js"></script>
   <script src="libs/fullcalendar/daygrid/index.global.min.js"></script>
@@ -23,118 +24,13 @@
 </head>
 
 <body>
-  <!-- <div id="calendar-layout">
-    <div id="filters">
-      <label for="categoryFilter">Category:</label>
-      <select id="categoryFilter">
-        <option value="all">All</option>
-        <option value="monthly">Monthly</option>
-        <option value="internal">Internal</option>
-        <option value="partner">Partner</option>
-        <option value="training">Training</option>
-      </select>
-
-      <label for="locationFilter">Location:</label>
-      <select id="locationFilter">
-        <option value="all">All</option>
-        <option value="varna">Varna</option>
-        <option value="sofia">Sofia</option>
-        <option value="plovdiv">Plovdiv</option>
-        <option value="online">Online</option>
-      </select>
-
-      <label for="organizerFilter">Organizer:</label>
-      <select id="organizerFilter">
-        <option value="all">All</option>
-        <option value="ict">ICT Cluster</option>
-        <option value="partner">Partner</option>
-      </select>
-
-      <label for="keywordFilter">Search:</label>
-      <input type="text" id="keywordFilter" placeholder="Search by keyword" />
-
-      <button onclick="printView()">Print</button>
-      <button onclick="exportToPDF()">Export PDF</button>
-      <button onclick="exportICS()">Export Calendar (.ics)</button>
-    </div>
-
-    <div id="calendar"></div>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
-
-  </div> -->
-
-  <div id="calendar-wrapper">
+  <div id="calendar-wrapper" style="visibility: hidden">
     <div id="calendar"></div>
   </div>
-
-
-
-  <!-- Modal за редакция/добавяне -->
-  <!-- <div id="eventModal" class="modal">
-    <div class="modal-content">
-      <span class="close-button">&times;</span>
-      <h2 id="modalTitle">Edit Event</h2>
-
-      <form id="eventForm">
-        <input type="hidden" id="eventId" />
-        <label>Title:</label>
-        <input type="text" id="title" required />
-
-        <label>Start Date:</label>
-        <input type="datetime-local" id="start" required />
-
-        <label>End Date:</label>
-        <input type="datetime-local" id="end" />
-
-        <label>Category:</label>
-        <select id="category">
-          <option value="monthly">Monthly</option>
-          <option value="internal">Internal</option>
-          <option value="partner">Partner</option>
-          <option value="training">Training</option>
-        </select>
-
-        <label>Location:</label>
-        <input type="text" id="location" />
-
-        <label>Organizer:</label>
-        <input type="text" id="organizer" />
-
-        <label>URL:</label>
-        <input type="url" id="url" />
-
-        <label>Description:</label>
-        <textarea id="description"></textarea>
-
-        <button id="saveEventBtn" class="modal-btn">Save</button>
-        <button id="deleteEventBtn" class="modal-btn">Delete</button>
-
-      </form>
-    </div>
-  </div> -->
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
   <!-- Preview Event -->
-  <!-- <div id="eventPreview" class="event-preview hidden">
-    <div class="event-header">
-      <span id="previewTitle"></span>
-      <div class="preview-icons">
-
-        <a id="googleCalBtn" target="_blank">Добави в Google Calendar</a>
-        <button id="icsCalBtn">Изтегли като .ics</button>
-        <button id="closePreview" title="Close"><i class="fas fa-times"></i></button>
-      </div>
-    </div>
-    <div class="event-body">
-      <div id="previewDate"></div>
-      <div id="previewLocation"></div>
-      <div id="previewOrganizer"></div>
-    </div>
-  </div> -->
-
   <div id="eventPreview" class="event-preview hidden">
     <div class="event-header">
       <div class="preview-actions">
