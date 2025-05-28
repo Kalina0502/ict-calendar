@@ -448,20 +448,48 @@ document.addEventListener('DOMContentLoaded', function () {
   // }
 
   // Местим бутона Today вътре в #calendar при мобилна версия
-if (window.innerWidth <= 768) {
-  const calendarEl = document.getElementById("calendar");
-  const todayBtn = document.getElementById("todayBtn");
+  // if (window.innerWidth <= 768) {
+  //   const calendarEl = document.getElementById("calendar");
+  //   const todayBtn = document.getElementById("todayBtn");
 
-  if (calendarEl && todayBtn) {
-    // Премахни от предишен родител
-    if (todayBtn.parentElement !== calendarEl) {
-      calendarEl.appendChild(todayBtn);
+  //   if (calendarEl && todayBtn) {
+  //     // Премахни от предишен родител
+  //     if (todayBtn.parentElement !== calendarEl) {
+  //       calendarEl.appendChild(todayBtn);
+  //     }
+
+  //     todayBtn.classList.remove("nav-tab", "active");
+  //     todayBtn.classList.add("mobile-today-btn");
+  //   }
+  // }
+
+
+  // === Мобилно местене на бутона Today ===
+  const todayBtn = document.getElementById("todayBtn");
+  document.getElementById("todayBtnMobile")?.addEventListener("click", () => {
+    calendar.today();
+  });
+  const calendarWrapper = document.getElementById("calendar-wrapper");
+
+  if (window.innerWidth <= 768 && todayBtn && calendarWrapper) {
+    // Създай контейнер под календара
+    let mobileTodayContainer = document.getElementById("mobile-today-container");
+    if (!mobileTodayContainer) {
+      mobileTodayContainer = document.createElement("div");
+      mobileTodayContainer.id = "mobile-today-container";
+      mobileTodayContainer.classList.add("nav-tabs", "mobile-today-container");
+      calendarWrapper.insertAdjacentElement("afterend", mobileTodayContainer);
     }
 
-    todayBtn.classList.remove("nav-tab", "active");
-    todayBtn.classList.add("mobile-today-btn");
+    // Премести бутона само ако още не е преместен
+    if (!mobileTodayContainer.contains(todayBtn)) {
+      todayBtn.classList.remove("nav-tab", "active");
+      todayBtn.classList.add("mobile-today-btn");
+
+      mobileTodayContainer.innerHTML = "";
+      mobileTodayContainer.appendChild(todayBtn);
+    }
   }
-}
 
 });
 

@@ -235,22 +235,29 @@
     }
 
 
-.mobile-today-btn {
-    margin: 20px auto 10px auto;
-    display: block;
-    background-color: #1a73e8;
-    color: white;
-    font-weight: 600;
-    padding: 10px 20px;
-    border-radius: 24px;
-    border: none;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    font-size: 15px;
-    width: fit-content;
-    text-align: center;
-  }
+    #todayBtn {
+        display: none !important;
+        /* Скрий оригиналния на мобилни */
+    }
 
-  .mobile-today-btn:hover {
-    background-color: #185ee0;
-  }
+    #todayBtnMobile {
+        display: block;
+        margin: 20px auto 10px auto;
+        background-color: #1a73e8;
+        color: white;
+        font-weight: 600;
+        padding: 10px 20px;
+        border-radius: 24px;
+        border: none;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        font-size: 15px;
+        width: fit-content;
+        text-align: center;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+    }
+
+    #todayBtnMobile:hover {
+        background-color: #185ee0;
+    }
 }
