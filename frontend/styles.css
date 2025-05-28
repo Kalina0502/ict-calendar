@@ -415,3 +415,7 @@ html {
     color: #185ee0;
     font-weight: 600;
 }
+
+.fc-daygrid-event-dot {
+  display: none !important;
+}
