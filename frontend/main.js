@@ -248,12 +248,27 @@ document.addEventListener('DOMContentLoaded', function () {
         hideEventPreview();
       });
 
-      const toolbarLeft = document.querySelector('.fc-toolbar .fc-toolbar-chunk:first-child');
-      const navButtons = document.querySelector('#nav-buttons-hidden .nav-tabs');
-      if (toolbarLeft && navButtons) {
-        toolbarLeft.appendChild(navButtons);
-        navButtons.style.display = "flex";
+      // const toolbarLeft = document.querySelector('.fc-toolbar .fc-toolbar-chunk:first-child');
+      // const navButtons = document.querySelector('#nav-buttons-hidden .nav-tabs');
+      // if (toolbarLeft && navButtons) {
+      //   toolbarLeft.appendChild(navButtons);
+      //   navButtons.style.display = "flex";
+      // }
+
+      const toolbarCenter = document.querySelector('.fc-toolbar .fc-toolbar-chunk:nth-child(2)');
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+
+      const titleEl = toolbarCenter.querySelector('.fc-toolbar-title');
+
+      if (toolbarCenter && prevBtn && nextBtn && titleEl) {
+        titleEl.before(prevBtn);
+        titleEl.after(nextBtn);
+        prevBtn.style.display = "inline-flex";
+        nextBtn.style.display = "inline-flex";
       }
+
+
 
       // Добавено: преизчисляване на календара и показване на контейнера
       calendar.updateSize();  // принудително преначертаване на календара с новия layout
@@ -287,8 +302,8 @@ document.addEventListener('DOMContentLoaded', function () {
         setTimeout(() => updateActiveState(nextBtn), 10);
       });
 
-      const prevBtn = document.getElementById('prevBtn');
-      const nextBtn = document.getElementById('nextBtn');
+      // const prevBtn = document.getElementById('prevBtn');
+      // const nextBtn = document.getElementById('nextBtn');
       const todayBtn = document.getElementById('todayBtn');
 
       function isTodayView() {
