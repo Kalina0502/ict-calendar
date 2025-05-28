@@ -137,9 +137,6 @@ document.addEventListener('DOMContentLoaded', function () {
           const descEl = document.getElementById('previewDescription');
           descEl.innerHTML = `<span class="desc-label"><i class="fa-solid fa-align-left"></i> <strong>Description:</strong></span><span class="desc-text">${safeDesc}</span>`;
 
-          // descEl.classList.remove('expanded');
-          // descEl.classList.remove('no-expand');
-
           const hasDesc = rawDesc && rawDesc.trim() !== '' && rawDesc !== 'No description';
 
           if (hasDesc) {
@@ -248,12 +245,12 @@ document.addEventListener('DOMContentLoaded', function () {
         hideEventPreview();
       });
 
-      // const toolbarLeft = document.querySelector('.fc-toolbar .fc-toolbar-chunk:first-child');
-      // const navButtons = document.querySelector('#nav-buttons-hidden .nav-tabs');
-      // if (toolbarLeft && navButtons) {
-      //   toolbarLeft.appendChild(navButtons);
-      //   navButtons.style.display = "flex";
-      // }
+      const toolbarLeft = document.querySelector('.fc-toolbar .fc-toolbar-chunk:first-child');
+      const navButtons = document.querySelector('#nav-buttons-hidden .nav-tabs');
+      if (toolbarLeft && navButtons) {
+        toolbarLeft.appendChild(navButtons);
+        navButtons.style.display = "flex";
+      }
 
       const toolbarCenter = document.querySelector('.fc-toolbar .fc-toolbar-chunk:nth-child(2)');
       const prevBtn = document.getElementById('prevBtn');
@@ -302,8 +299,6 @@ document.addEventListener('DOMContentLoaded', function () {
         setTimeout(() => updateActiveState(nextBtn), 10);
       });
 
-      // const prevBtn = document.getElementById('prevBtn');
-      // const nextBtn = document.getElementById('nextBtn');
       const todayBtn = document.getElementById('todayBtn');
 
       function isTodayView() {

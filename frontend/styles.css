@@ -437,7 +437,7 @@ html {
   transition: background 0.2s ease;
   vertical-align: middle;
   line-height: 1;
-  margin-top: 2px; /* ако искаш фина настройка спрямо текста */
+  margin-top: 2px;
 }
 
 #prevBtn:hover,
@@ -450,4 +450,41 @@ html {
   align-items: center;
   justify-content: center;
   gap: 10px;
+}
+
+.fc-toolbar .nav-tabs {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 99px;
+  box-shadow: 0 0 1px rgba(24, 94, 224, 0.15),
+              0 6px 12px rgba(24, 94, 224, 0.15);
+ padding: 0px 6px;
+  gap: 6px;
+  height: 38px;
+}
+
+#todayBtn.nav-tab {
+  font-size: 0.85rem;
+  font-weight: 550;
+  color: #434141;
+  background-color: transparent;
+  border: none;
+  border-radius: 99px;
+  padding: 0 14px;
+  height: 30px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+#todayBtn.nav-tab:hover {
+  background-color: #f0f4fa;
+
+
+}
+
+#todayBtn.nav-tab.active {
+  font-weight: 600;
+  color: #185ee0;
+  background-color: #e6eef9;
 }
