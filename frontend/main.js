@@ -418,6 +418,51 @@ document.addEventListener('DOMContentLoaded', function () {
       };
     }).filter(Boolean);
   }
+
+  // Преместване на бутона Today под календара при мобилна версия
+  // if (window.innerWidth <= 768) {
+  //   const calendarWrapper = document.getElementById("calendar-wrapper");
+  //   const todayBtn = document.getElementById("todayBtn");
+
+  //   if (calendarWrapper && todayBtn) {
+  //     // Премахни текущия родител
+  //     const navTabs = document.querySelector('.nav-tabs');
+  //     if (navTabs && navTabs.contains(todayBtn)) {
+  //       navTabs.removeChild(todayBtn);
+  //     }
+
+  //     // Създай контейнер долу, ако не съществува
+  //     let mobileTodayContainer = document.getElementById("mobile-today-container");
+  //     if (!mobileTodayContainer) {
+  //       mobileTodayContainer = document.createElement("div");
+  //       mobileTodayContainer.id = "mobile-today-container";
+  //       calendarWrapper.insertAdjacentElement("afterend", mobileTodayContainer);
+  //     }
+
+  //     mobileTodayContainer.appendChild(todayBtn);
+
+  //     todayBtn.classList.remove("nav-tab");
+  //     todayBtn.classList.remove("active");
+  //     todayBtn.classList.add("mobile-today");
+  //   }
+  // }
+
+  // Местим бутона Today вътре в #calendar при мобилна версия
+if (window.innerWidth <= 768) {
+  const calendarEl = document.getElementById("calendar");
+  const todayBtn = document.getElementById("todayBtn");
+
+  if (calendarEl && todayBtn) {
+    // Премахни от предишен родител
+    if (todayBtn.parentElement !== calendarEl) {
+      calendarEl.appendChild(todayBtn);
+    }
+
+    todayBtn.classList.remove("nav-tab", "active");
+    todayBtn.classList.add("mobile-today-btn");
+  }
+}
+
 });
 
 document.addEventListener('click', (e) => {
