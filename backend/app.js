@@ -6,8 +6,6 @@ const cors = require('cors');
 const app = express();
 const PORT = 3000;
 
-const DATA_FILE = path.join(__dirname, '../data/events.json');
-
 // Middleware
 app.use(cors());
 app.use(express.json());
@@ -99,4 +97,3 @@ setInterval(() => {
     }
   });
 }, 15 * 1000); //5 * 60 * 1000
-

@@ -43,25 +43,6 @@ app.get('/oauth2callback', async (req, res) => {
     // Свързване с Calendar API
     const calendar = google.calendar({ version: 'v3', auth: oAuth2Client });
 
-    // Създаване на събитие
-    const event = {
-      summary: 'Тестово събитие от OAuth',
-      description: 'Създадено чрез Node.js и Google Calendar API',
-      start: {
-        dateTime: '2025-05-20T10:00:00+03:00',
-        timeZone: 'Europe/Sofia',
-      },
-      end: {
-        dateTime: '2025-05-20T11:00:00+03:00',
-        timeZone: 'Europe/Sofia',
-      },
-    };
-
-    const response = await calendar.events.insert({
-      calendarId: 'primary',
-      requestBody: event,
-    });
-
     res.send(` Събитието е създадено успешно: <a href="${response.data.htmlLink}" target="_blank">Виж в календара</a>`);
   } catch (err) {
     console.error('OAuth грешка:', err);
