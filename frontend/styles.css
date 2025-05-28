@@ -33,7 +33,6 @@ html {
     background-color: #fff;
     border-radius: 12px;
     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
-    /* overflow: visible; */
 }
 
 #calendar {
@@ -229,7 +228,6 @@ html {
   pointer-events: none;
 }
 
-
 .event-body div {
     display: flex;
     align-items: center;
@@ -290,16 +288,10 @@ html {
     cursor: pointer;
     transition: all 0.2s ease;
     display: block;
-
 }
 
+.preview-description.expanded,
 .preview-description.expanded .desc-text {
-    white-space: normal;
-    max-height: none;
-    max-width: 100%;
-}
-
-.preview-description.expanded {
     white-space: normal;
     max-height: none;
     max-width: 100%;
