@@ -4,6 +4,21 @@ let selectedEvent = null;
 let icsLib;
 let lastOpenedEventId = null;
 
+function hideEventPreview() {
+  const preview = document.getElementById('eventPreview');
+  if (preview?.classList.contains('show')) {
+    preview.classList.remove('show');
+    lastOpenedEventId = null;
+  }
+}
+
+function debounce(fn, delay = 100) {
+  let timeout;
+  return function (...args) {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => fn.apply(this, args), delay);
+  };
+}
 
 document.addEventListener('DOMContentLoaded', function () {
   const calendarEl = document.getElementById('calendar');
@@ -44,7 +59,6 @@ document.addEventListener('DOMContentLoaded', function () {
           el.style.borderColor = '';
           el.style.color = '';
         },
-
 
         eventClick: function (info) {
           info.jsEvent.preventDefault();
@@ -172,7 +186,6 @@ document.addEventListener('DOMContentLoaded', function () {
       calendar.addEventSource(processedEvents);
       calendar.render();
 
-
       function updateGliderPosition() {
         const activeTab = document.querySelector('.container input[type="radio"]:checked + label');
         const glider = document.querySelector('.glider');
@@ -197,24 +210,23 @@ document.addEventListener('DOMContentLoaded', function () {
       });
 
       document.getElementById('radio-1').addEventListener('change', () => {
-        calendar.changeView('dayGridMonth')
-        lastOpenedEventId = null;
-        document.getElementById('eventPreview')?.classList.remove('show');
+        calendar.changeView('dayGridMonth');
+        hideEventPreview();
       });
+
       document.getElementById('radio-2').addEventListener('change', () => {
-        calendar.changeView('timeGridWeek')
-        lastOpenedEventId = null;
-        document.getElementById('eventPreview')?.classList.remove('show');
+        calendar.changeView('timeGridWeek');
+        hideEventPreview();
       });
+
       document.getElementById('radio-3').addEventListener('change', () => {
-        calendar.changeView('timeGridDay')
-        lastOpenedEventId = null;
-        document.getElementById('eventPreview')?.classList.remove('show');
+        calendar.changeView('timeGridDay');
+        hideEventPreview();
       });
+
       document.getElementById('radio-4').addEventListener('change', () => {
-        calendar.changeView('listMonth')
-        lastOpenedEventId = null;
-        document.getElementById('eventPreview')?.classList.remove('show');
+        calendar.changeView('listMonth');
+        hideEventPreview();
       });
 
       const toolbarLeft = document.querySelector('.fc-toolbar .fc-toolbar-chunk:first-child');
@@ -351,7 +363,6 @@ document.addEventListener('DOMContentLoaded', function () {
         return null;
       }
 
-      // Сравняваме само по дата (не часове)
       const compareEnd = new Date(endDate.getFullYear(), endDate.getMonth(), endDate.getDate());
 
       const isPast = compareEnd < today;
@@ -376,24 +387,16 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 });
 
-//Close preview section
 document.addEventListener('click', (e) => {
   const preview = document.getElementById('eventPreview');
-  const isInsidePopup = preview.contains(e.target);
-  const isCalendarEvent = e.target.closest('.fc-event');
-
-  if (!isInsidePopup && !isCalendarEvent) {
-    preview.classList.remove('show');
+  if (preview?.classList.contains('show') &&
+    !preview.contains(e.target) &&
+    !e.target.closest('.fc-event')) {
+    hideEventPreview();
   }
 });
 
-window.addEventListener('scroll', () => {
-  const preview = document.getElementById('eventPreview');
-  if (preview && preview.classList.contains('show')) {
-    preview.classList.remove('show');
-    lastOpenedEventId = null;
-  }
-});
+window.addEventListener('scroll', debounce(hideEventPreview), { passive: true });
 
 function linkify(inputText) {
   let replacedText = inputText;
