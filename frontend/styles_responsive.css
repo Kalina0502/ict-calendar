@@ -104,8 +104,9 @@
 
     /* Дни от седмицата */
     .fc-col-header-cell-cushion {
-        font-size: 0.75rem !important;
         color: #2a2929 !important;
+        font-size: 0.85rem;
+        font-weight: 500 !important;
     }
 
     /* Заглавие на събитие */
