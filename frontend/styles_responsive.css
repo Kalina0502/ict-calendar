@@ -307,4 +307,8 @@
     .fc .fc-timegrid-slot-minor {
         display: none !important;
     }
+
+    .fc-timegrid-event-harness>.fc-timegrid-event {
+        inset: 0 !important;
+    }
 }
