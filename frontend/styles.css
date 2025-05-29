@@ -93,36 +93,6 @@ html {
     border-radius: 4px;
 }
 
-/* Print and Export PDF */
-/* #filters button {
-  background-color: var(--main-blue);
-  color: var(--white);
-  border: none;
-  border-radius: 6px;
-  font-size: 1rem;
-  font-weight: 500;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.3s ease, transform 0.2s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 7px 16px;
-}
-
-*/
-
-/* #filters button:hover {
-  background-color: var(--accent-blue);
-  transform: scale(1.05);
-}
-
-#filters button:active {
-  transform: scale(0.97);
-}
-
-*/
-
 /* ===================================================
    Close Button
 =================================================== */
@@ -416,10 +386,16 @@ html {
     font-weight: 600;
 }
 
+/* ===================================================
+   Remove default event dots from Month View
+=================================================== */
 .fc-daygrid-event-dot {
     display: none !important;
 }
 
+/* ===================================================
+   Previous / Next Month Navigation Buttons
+=================================================== */
 #prevBtn,
 #nextBtn {
     display: inline-flex;
@@ -445,6 +421,9 @@ html {
     background-color: rgba(0, 0, 0, 0.05);
 }
 
+/* ===================================================
+   Center Align for Middle Toolbar Section (e.g., View Mode Tabs)
+=================================================== */
 .fc-toolbar-chunk:nth-child(2) {
     display: flex;
     align-items: center;
@@ -487,10 +466,16 @@ html {
     background-color: #e6eef9;
 }
 
+/* ===================================================
+   Mobile-Specific "Today" Button Visibility Control
+=================================================== */
 #todayBtnMobile {
     display: none;
 }
 
+/* ===================================================
+   Highlight for "Today" Cell in Month View
+=================================================== */
 .fc-daygrid-day.fc-day-today .fc-daygrid-day-frame {
     height: 100%;
     width: 100%;
