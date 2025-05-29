@@ -228,21 +228,19 @@
         background-color: rgba(0, 0, 0, 0.05);
     }
 
-    /* Заглавие на календара (напр. May 2025) */
+    /* Заглавие на календара */
     .fc-toolbar-title {
         font-size: 1.1rem;
         font-weight: 600;
     }
 
-
     #todayBtn {
         display: none !important;
-        /* Скрий оригиналния на мобилни */
     }
 
     #todayBtnMobile {
         display: block;
-        margin: 20px auto 10px auto;
+        margin: 20px 0 10px auto;
         background-color: #1a73e8;
         color: white;
         font-weight: 600;
@@ -259,5 +257,13 @@
 
     #todayBtnMobile:hover {
         background-color: #185ee0;
+    }
+
+    #todayBtnMobile {
+        display: block !important;
+    }
+
+    .fc-toolbar .nav-tabs {
+        display: none !important;
     }
 }

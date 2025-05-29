@@ -299,27 +299,6 @@ document.addEventListener('DOMContentLoaded', function () {
         setTimeout(() => updateActiveState(nextBtn), 10);
       });
 
-      const todayBtn = document.getElementById('todayBtn');
-
-      function isTodayView() {
-        const currentDate = calendar.getDate();
-        const now = new Date();
-        return currentDate.getMonth() === now.getMonth() &&
-          currentDate.getFullYear() === now.getFullYear();
-      }
-
-      function updateActiveState(activeButton) {
-        prevBtn.classList.remove('active');
-        nextBtn.classList.remove('active');
-        todayBtn.classList.remove('active');
-
-        if (isTodayView()) {
-          todayBtn.classList.add('active');
-        } else {
-          activeButton?.classList.add('active');
-        }
-      }
-
       updateActiveState();
 
       // Слушател
@@ -419,75 +398,44 @@ document.addEventListener('DOMContentLoaded', function () {
     }).filter(Boolean);
   }
 
-  // Преместване на бутона Today под календара при мобилна версия
-  // if (window.innerWidth <= 768) {
-  //   const calendarWrapper = document.getElementById("calendar-wrapper");
-  //   const todayBtn = document.getElementById("todayBtn");
-
-  //   if (calendarWrapper && todayBtn) {
-  //     // Премахни текущия родител
-  //     const navTabs = document.querySelector('.nav-tabs');
-  //     if (navTabs && navTabs.contains(todayBtn)) {
-  //       navTabs.removeChild(todayBtn);
-  //     }
-
-  //     // Създай контейнер долу, ако не съществува
-  //     let mobileTodayContainer = document.getElementById("mobile-today-container");
-  //     if (!mobileTodayContainer) {
-  //       mobileTodayContainer = document.createElement("div");
-  //       mobileTodayContainer.id = "mobile-today-container";
-  //       calendarWrapper.insertAdjacentElement("afterend", mobileTodayContainer);
-  //     }
-
-  //     mobileTodayContainer.appendChild(todayBtn);
-
-  //     todayBtn.classList.remove("nav-tab");
-  //     todayBtn.classList.remove("active");
-  //     todayBtn.classList.add("mobile-today");
-  //   }
-  // }
-
-  // Местим бутона Today вътре в #calendar при мобилна версия
-  // if (window.innerWidth <= 768) {
-  //   const calendarEl = document.getElementById("calendar");
-  //   const todayBtn = document.getElementById("todayBtn");
-
-  //   if (calendarEl && todayBtn) {
-  //     // Премахни от предишен родител
-  //     if (todayBtn.parentElement !== calendarEl) {
-  //       calendarEl.appendChild(todayBtn);
-  //     }
-
-  //     todayBtn.classList.remove("nav-tab", "active");
-  //     todayBtn.classList.add("mobile-today-btn");
-  //   }
-  // }
-
-
-  // === Мобилно местене на бутона Today ===
+  // За десктоп бутона
   const todayBtn = document.getElementById("todayBtn");
-  document.getElementById("todayBtnMobile")?.addEventListener("click", () => {
-    calendar.today();
-  });
-  const calendarWrapper = document.getElementById("calendar-wrapper");
+  if (todayBtn) {
+    todayBtn.addEventListener("click", () => {
+      calendar.today();
+      setTimeout(() => updateActiveState(), 10);
+    });
+  }
 
-  if (window.innerWidth <= 768 && todayBtn && calendarWrapper) {
-    // Създай контейнер под календара
-    let mobileTodayContainer = document.getElementById("mobile-today-container");
-    if (!mobileTodayContainer) {
-      mobileTodayContainer = document.createElement("div");
-      mobileTodayContainer.id = "mobile-today-container";
-      mobileTodayContainer.classList.add("nav-tabs", "mobile-today-container");
-      calendarWrapper.insertAdjacentElement("afterend", mobileTodayContainer);
-    }
+  // За мобилния бутон
+  const todayBtnMobile = document.getElementById("todayBtnMobile");
+  if (todayBtnMobile) {
+    todayBtnMobile.addEventListener("click", () => {
+      calendar.today();
+      setTimeout(() => updateActiveState(), 10);
+    });
+  }
 
-    // Премести бутона само ако още не е преместен
-    if (!mobileTodayContainer.contains(todayBtn)) {
-      todayBtn.classList.remove("nav-tab", "active");
-      todayBtn.classList.add("mobile-today-btn");
+  function updateActiveState(activeButton) {
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const todayBtn = document.getElementById('todayBtn');
 
-      mobileTodayContainer.innerHTML = "";
-      mobileTodayContainer.appendChild(todayBtn);
+    if (!prevBtn || !nextBtn || !todayBtn || !calendar) return;
+
+    prevBtn.classList.remove('active');
+    nextBtn.classList.remove('active');
+    todayBtn.classList.remove('active');
+
+    const currentDate = calendar.getDate();
+    const now = new Date();
+    const isToday = currentDate.getMonth() === now.getMonth() &&
+      currentDate.getFullYear() === now.getFullYear();
+
+    if (isToday) {
+      todayBtn.classList.add('active');
+    } else {
+      activeButton?.classList.add('active');
     }
   }
 
