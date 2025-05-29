@@ -197,17 +197,11 @@
     }
 
     /* Заглавие на събитие в dayGrid */
-    .fc-event-title {
+    /* .fc-event-title {
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-    }
-
-    /* Днешен ден — оцветяване */
-    .fc-daygrid-day.fc-day-today {
-        background-color: #f3f7ff;
-        border-radius: 6px;
-    }
+    } */
 
     /* Лека рамка между дните */
     .fc-daygrid-day {

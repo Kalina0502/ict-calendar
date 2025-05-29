@@ -490,3 +490,9 @@ html {
 #todayBtnMobile {
     display: none;
 }
+
+.fc-daygrid-day.fc-day-today .fc-daygrid-day-frame {
+    height: 100%;
+    width: 100%;
+    background-color: #e4e9f4;
+}
