@@ -481,3 +481,20 @@ html {
     width: 100%;
     background-color: #e4e9f4;
 }
+
+.fc-daygrid-day:hover {
+  background-color: #f5f9ff;
+}
+
+
+.fc-col-header-cell {
+  background-color: #f9fafc;
+  border-radius: 6px;
+  transition: box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.fc-col-header-cell-cushion {
+  font-weight: 500;
+  color: #333;
+}
+
