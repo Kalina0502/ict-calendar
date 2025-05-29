@@ -1,7 +1,6 @@
 let calendar;
 let allEvents = [];
 let selectedEvent = null;
-let icsLib;
 let lastOpenedEventId = null;
 
 function hideEventPreview() {
@@ -29,7 +28,6 @@ function updateGliderPosition() {
     glider.style.width = `${rect.width}px`;
   }
 }
-
 
 document.addEventListener('DOMContentLoaded', function () {
   const calendarEl = document.getElementById('calendar');
@@ -157,7 +155,6 @@ document.addEventListener('DOMContentLoaded', function () {
             preview.classList.remove('expanded');
           }
 
-
           // Open new tab
           description.querySelectorAll('a').forEach(link => {
             link.setAttribute('target', '_blank');
@@ -264,8 +261,6 @@ document.addEventListener('DOMContentLoaded', function () {
         prevBtn.style.display = "inline-flex";
         nextBtn.style.display = "inline-flex";
       }
-
-
 
       // Добавено: преизчисляване на календара и показване на контейнера
       calendar.updateSize();  // принудително преначертаване на календара с новия layout
