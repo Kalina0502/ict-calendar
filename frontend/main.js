@@ -393,15 +393,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }).filter(Boolean);
   }
 
-  // За десктоп бутона
-  const todayBtn = document.getElementById("todayBtn");
-  if (todayBtn) {
-    todayBtn.addEventListener("click", () => {
-      calendar.today();
-      setTimeout(() => updateActiveState(), 10);
-    });
-  }
-
   // За мобилния бутон
   const todayBtnMobile = document.getElementById("todayBtnMobile");
   if (todayBtnMobile) {

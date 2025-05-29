@@ -34,11 +34,11 @@
     }
 
     /* Премахване на нежелан scroll в timegrid */
-    .fc-timegrid-body,
+    /* .fc-timegrid-body,
     .fc-timegrid-slots,
     .fc-timegrid-cols {
         overflow: unset !important;
-    }
+    } */
 
     /* Отстояние вдясно при списъчен изглед */
     .fc .fc-list-day-cushion {
@@ -132,6 +132,20 @@
         text-overflow: ellipsis;
     }
 
+    /* List - day text style */
+    .fc-list-day-side-text {
+        color: #282727 !important;
+        font-weight: 700 !important;
+        font-size: 0.85rem !important;
+    }
+
+    /* List - day style */
+    .fc-list-day-text {
+        color: #282727 !important;
+        font-weight: 700 !important;
+        font-size: 0.85rem !important;
+    }
+
     .event-body i {
         margin-right: 4px;
         flex-shrink: 0;
@@ -202,7 +216,7 @@
 
     /* ===== НАВИГАЦИЯ — СТРЕЛКИ И ЗАГЛАВИЕ ===== */
 
-    /* Централна зона с заглавие и стрелки */
+    /* Централна зона със заглавие и стрелки */
     .fc-toolbar-chunk:nth-child(2) {
         display: flex;
         align-items: center;
