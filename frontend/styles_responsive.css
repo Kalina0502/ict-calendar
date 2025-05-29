@@ -23,14 +23,10 @@
         min-height: 50px;
     }
 
-    /* Ограничаване височината на time grid и разрешаване на скрол */
-    .fc-timegrid,
-    .fc-timegrid-body,
-    .fc-timegrid-slots,
-    .fc-scrollgrid-sync-table {
-        max-height: 80vh;
-        overflow-y: auto !important;
-        -webkit-overflow-scrolling: touch;
+    .fc-timegrid {
+        height: auto !important;
+        max-height: none !important;
+        overflow-y: visible !important;
     }
 
     /* Премахване на нежелан scroll в timegrid */
@@ -288,5 +284,27 @@
     .fc-list-event-time,
     .fc-list-event-title {
         padding-left: 12px !important;
+    }
+
+    /*timeGrid layout - Week*/
+    .fc .fc-timegrid-col-frame {
+        border-left: 1px solid #dcdcdc;
+        box-sizing: border-box;
+    }
+
+    .fc .fc-timegrid-axis-frame {
+        border-left: none !important;
+        border-right: 1px solid #e0e0e0;
+    }
+
+    .fc .fc-timegrid-slot,
+    .fc .fc-timegrid-slot-label {
+        height: 80px !important;
+        min-height: 80px !important;
+        line-height: 80px !important;
+    }
+
+    .fc .fc-timegrid-slot-minor {
+        display: none !important;
     }
 }
