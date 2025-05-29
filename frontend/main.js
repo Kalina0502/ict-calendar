@@ -420,12 +420,19 @@ document.addEventListener('DOMContentLoaded', function () {
     const prevBtn = document.getElementById('prevBtn');
     const nextBtn = document.getElementById('nextBtn');
     const todayBtn = document.getElementById('todayBtn');
+    const todayBtnMobile = document.getElementById("todayBtnMobile");
+    todayBtnMobile.classList.add('nav-tab');
+
+    if (todayBtnMobile) {
+      todayBtnMobile.classList.remove("active");
+    }
 
     if (!prevBtn || !nextBtn || !todayBtn || !calendar) return;
 
     prevBtn.classList.remove('active');
     nextBtn.classList.remove('active');
     todayBtn.classList.remove('active');
+    todayBtnMobile.classList.remove("active");
 
     const currentDate = calendar.getDate();
     const now = new Date();
@@ -434,6 +441,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (isToday) {
       todayBtn.classList.add('active');
+      if (todayBtnMobile) {
+        todayBtnMobile.classList.add('active');
+      }
     } else {
       activeButton?.classList.add('active');
     }
