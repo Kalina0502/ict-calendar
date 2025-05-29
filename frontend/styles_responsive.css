@@ -182,7 +182,7 @@
     .fc-event {
         font-size: 0.75rem !important;
         padding: 4px 6px;
-        border-radius: 10px;
+        border-radius: 6px;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
