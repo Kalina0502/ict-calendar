@@ -279,4 +279,18 @@
     .fc-toolbar .nav-tabs {
         display: none !important;
     }
+
+    /* Event dot - list */
+    .fc-list-event-dot {
+        display: none !important;
+    }
+
+    .fc-list-event-graphic {
+        display: none !important;
+    }
+
+    .fc-list-event-time,
+    .fc-list-event-title {
+        padding-left: 12px !important;
+    }
 }
