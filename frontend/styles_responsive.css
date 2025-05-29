@@ -34,11 +34,11 @@
     }
 
     /* Премахване на нежелан scroll в timegrid */
-    /* .fc-timegrid-body,
+    .fc-timegrid-body,
     .fc-timegrid-slots,
     .fc-timegrid-cols {
         overflow: unset !important;
-    } */
+    }
 
     /* Отстояние вдясно при списъчен изглед */
     .fc .fc-list-day-cushion {
