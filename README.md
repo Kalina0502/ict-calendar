@@ -28,26 +28,6 @@
 
 ---
 
-## 📁 Project Structure
-
-```
-
-project-root/
-├── backend/               # Backend logic (Express server & Google Calendar sync)
-├── frontend/              # Frontend code (HTML/CSS/JS)
-│   ├── index.html
-│   ├── main.js
-│   ├── styles.css
-│   └── styles\_responsive.css
-├── libs/                  # FullCalendar library files
-├── app.js                 # Express server entry
-├── sync.js                # Google Calendar sync logic
-├── .env                   # Contains sensitive keys (not committed)
-
-````
-
----
-
 ## 🚀 Setup Instructions
 
 ### 1. Clone the Repository
@@ -115,5 +95,3 @@ This project is open-source and licensed under the MIT License.
 ## 👩‍💻 Author
 
 Developed by [Kalina0502](https://github.com/Kalina0502)
-
-```
