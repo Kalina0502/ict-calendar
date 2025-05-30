@@ -422,9 +422,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const currentDate = calendar.getDate();
     const now = new Date();
-    const isToday = currentDate.getMonth() === now.getMonth() &&
-      currentDate.getFullYear() === now.getFullYear();
-
+    const isToday =
+      currentDate.getFullYear() === now.getFullYear() &&
+      currentDate.getMonth() === now.getMonth() &&
+      currentDate.getDate() === now.getDate();
     if (isToday) {
       todayBtn.classList.add('active');
       if (todayBtnMobile) {
